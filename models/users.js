@@ -3,7 +3,7 @@ const sequelize = require('../util/db');
 
 /**
  * Define users table
- * created_at & updated_at columns automatically added by ORM
+ * @created_at & @updated_at columns automatically added by ORM
  */
 const User = sequelize.define(
     'users',
