@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const passport = require('passport');
 
 const sequelize = require('./util/db');
 const User = require('./models/users');
@@ -16,9 +17,10 @@ const authRouter = require('./routes/auth');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.get('/', (req, res, next) => {
-    res.send('hey');
-});
+/** Passport middleware */
+app.use(passport.initialize());
+/** Passport config */
+require('./util/passport')(passport);
 
 app.use('/auth', authRouter);
 

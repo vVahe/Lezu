@@ -1,6 +1,8 @@
 const express = require('express');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const passport = require('passport');
+
 const keys = require('../util/keys');
 const router = express.Router();
 
@@ -8,7 +10,7 @@ const router = express.Router();
 const User = require('../models/users');
 
 /**
- * @route   GET /auth/login
+ * @route   POST /auth/login
  * @desc    Login user by returning JWT token
  * @access  Public
  */
@@ -16,6 +18,7 @@ router.post('/login', (req, res, next) => {
     const error = {};
     // find user with incoming username
     // TODO: login with email
+
     User.findOne({ where: { username: req.body.username } }).then(user => {
         if (!user) {
             // if a user is not found
@@ -30,8 +33,8 @@ router.post('/login', (req, res, next) => {
 
                 // create payload for the JWT token
                 const payload = {
-                    id: user.id,
-                    username: user.name,
+                    user_id: user.user_id,
+                    username: user.username,
                     first_name: user.first_name,
                     last_name: user.last_name,
                     email: user.email
@@ -41,6 +44,7 @@ router.post('/login', (req, res, next) => {
                 jwt.sign(
                     payload,
                     keys.secretOrKey,
+                    // FIXME: set JWToken expire date to 60 min in production
                     { expiresIn: 3600 * 24 },
                     (err, token) => {
                         // return token
@@ -60,7 +64,7 @@ router.post('/login', (req, res, next) => {
 });
 
 /**
- * @route   GET /auth/register
+ * @route   POST /auth/register
  * @desc    Register user
  * @access  Public
  */
@@ -100,6 +104,20 @@ router.post('/register', (req, res, next) => {
         });
     });
 });
+
+/**
+ * @route   GET /auth/current
+ * @desc    Returns the currently logged in user
+ * @access  Private
+ * TODO: remove in production
+ */
+router.get(
+    '/current',
+    passport.authenticate('jwt', { session: false }),
+    (req, res) => {
+        res.json(req.user);
+    }
+);
 
 /**
  * @route   GET /auth/logout
