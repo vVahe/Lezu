@@ -10,7 +10,19 @@ const User = require('../models/users');
  * @desc    Login user by returning JWT token
  * @access  Public
  */
-router.post('/login', (req, res, next) => {});
+router.post('/login', (req, res, next) => {
+    const error = {};
+
+    User.findOne({ where: { username: req.body.username } }).then(user => {
+        // if a user is found
+        if (user) {
+            return res.json(user);
+        } else {
+            error.user = 'username or password was not correct';
+            res.status(400).json(error);
+        }
+    });
+});
 
 /**
  * @route   GET /auth/register
@@ -19,7 +31,7 @@ router.post('/login', (req, res, next) => {});
  */
 router.post('/register', (req, res, next) => {
     const error = {};
-
+    // TODO: using the same email won't give an appropriate error yet
     // generate salt and encrypt plain password with salt
     bycript.genSalt(10, (err, salt) => {
         bycript.hash(req.body.password, salt, (err, hash) => {
@@ -35,15 +47,15 @@ router.post('/register', (req, res, next) => {
                 }
             })
                 .then(([user, created]) => {
-                    // if user already existed
+                    // if user already existed throw error
                     if (!created) {
                         error.user = `User with the following username: ${
                             user.username
                         } already exists`;
                         return res.status(400).json(error);
                     } else {
-                        // else new user has been registered
-                        res.json(user);
+                        // else return new registered user
+                        return res.json(user);
                     }
                 })
                 .catch(err => {
