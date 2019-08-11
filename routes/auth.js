@@ -1,5 +1,5 @@
 const express = require('express');
-const bycript = require('bcryptjs');
+const bcrypt = require('bcryptjs');
 const router = express.Router();
 
 /** Load User model */
@@ -14,13 +14,23 @@ router.post('/login', (req, res, next) => {
     const error = {};
 
     User.findOne({ where: { username: req.body.username } }).then(user => {
-        // if a user is found
-        if (user) {
-            return res.json(user);
-        } else {
-            error.user = 'username or password was not correct';
-            res.status(400).json(error);
+        if (!user) {
+            // if a user is not found
+            error.user = 'user with this username was not found';
+            return res.status(400).json(error);
         }
+
+        // compare incoming & db password
+        bcrypt.compare(req.body.password, user.password).then(isMatch => {
+            if (isMatch) {
+                // password correct send back user data
+                return res.json(user);
+            } else {
+                // password incorrect send back error msg
+                error.password = 'password was incorrect';
+                return res.status(400).json(error);
+            }
+        });
     });
 });
 
@@ -33,8 +43,8 @@ router.post('/register', (req, res, next) => {
     const error = {};
     // TODO: using the same email won't give an appropriate error yet
     // generate salt and encrypt plain password with salt
-    bycript.genSalt(10, (err, salt) => {
-        bycript.hash(req.body.password, salt, (err, hash) => {
+    bcrypt.genSalt(10, (err, salt) => {
+        bcrypt.hash(req.body.password, salt, (err, hash) => {
             if (err) throw err;
 
             User.findOrCreate({
@@ -47,20 +57,20 @@ router.post('/register', (req, res, next) => {
                 }
             })
                 .then(([user, created]) => {
-                    // if user already existed throw error
                     if (!created) {
+                        // user already exists throw error
                         error.user = `User with the following username: ${
                             user.username
                         } already exists`;
                         return res.status(400).json(error);
                     } else {
-                        // else return new registered user
+                        // return registered user
                         return res.json(user);
                     }
                 })
                 .catch(err => {
                     error.db = err;
-                    res.status(400).json(err);
+                    return res.status(400).json(err);
                 });
         });
     });

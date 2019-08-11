@@ -3,6 +3,7 @@ const Sequelize = require('sequelize');
 const sequelize = new Sequelize('word_trainer', 'root', 'iowe8923', {
     host: 'localhost',
     dialect: 'mysql',
+    logging: false,
     pool: {
         max: 10,
         min: 0,
