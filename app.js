@@ -3,9 +3,6 @@ const bodyParser = require('body-parser');
 const passport = require('passport');
 
 const sequelize = require('./util/db');
-const User = require('./models/users');
-const Word = require('./models/words');
-const UserWords = require('./models/user_words');
 
 const app = express();
 const port = 3000;

@@ -3,6 +3,9 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const passport = require('passport');
 
+// import validators
+const registerValidator = require('../validation/register-validator');
+
 const keys = require('../util/keys');
 const router = express.Router();
 
@@ -69,7 +72,14 @@ router.post('/login', (req, res, next) => {
  * @access  Public
  */
 router.post('/register', (req, res, next) => {
-    const error = {};
+    const error = registerValidator(req.body);
+
+    // check if validation passed
+    if (error.passed === 'no') {
+        // send validation errors
+        return res.json(error);
+    }
+
     // TODO: using the same email won't give an appropriate error yet
     // generate salt and encrypt plain password with salt
     bcrypt.genSalt(10, (err, salt) => {
