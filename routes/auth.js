@@ -1,5 +1,7 @@
 const express = require('express');
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const keys = require('../util/keys');
 const router = express.Router();
 
 /** Load User model */
@@ -12,7 +14,8 @@ const User = require('../models/users');
  */
 router.post('/login', (req, res, next) => {
     const error = {};
-
+    // find user with incoming username
+    // TODO: login with email
     User.findOne({ where: { username: req.body.username } }).then(user => {
         if (!user) {
             // if a user is not found
@@ -23,8 +26,30 @@ router.post('/login', (req, res, next) => {
         // compare incoming & db password
         bcrypt.compare(req.body.password, user.password).then(isMatch => {
             if (isMatch) {
-                // password correct send back user data
-                return res.json(user);
+                // password correct send back JWT token
+
+                // create payload for the JWT token
+                const payload = {
+                    id: user.id,
+                    username: user.name,
+                    first_name: user.first_name,
+                    last_name: user.last_name,
+                    email: user.email
+                };
+
+                // sign token
+                jwt.sign(
+                    payload,
+                    keys.secretOrKey,
+                    { expiresIn: 3600 * 24 },
+                    (err, token) => {
+                        // return token
+                        return res.json({
+                            success: true,
+                            token: 'Bearer ' + token
+                        });
+                    }
+                );
             } else {
                 // password incorrect send back error msg
                 error.password = 'password was incorrect';
