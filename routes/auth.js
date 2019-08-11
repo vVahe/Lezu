@@ -1,5 +1,4 @@
 const express = require('express');
-<<<<<<< HEAD
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const passport = require('passport');
@@ -119,23 +118,6 @@ router.get(
         res.json(req.user);
     }
 );
-=======
-const router = express.Router();
-
-/**
- * @route   GET /auth/login
- * @desc    Login user by returning JWT token
- * @access  Public
- */
-router.post('/login', (req, res, next) => {});
-
-/**
- * @route   GET /auth/register
- * @desc    Register user
- * @access  Public
- */
-router.post('/register', (req, res, next) => {});
->>>>>>> 420afae4a6a7a544c7b567fcad759691f2d3e1e1
 
 /**
  * @route   GET /auth/logout
@@ -143,8 +125,5 @@ router.post('/register', (req, res, next) => {});
  * @access  Private
  */
 router.post('/logout', (req, res, next) => {});
-<<<<<<< HEAD
 
 module.exports = router;
-=======
->>>>>>> 420afae4a6a7a544c7b567fcad759691f2d3e1e1
