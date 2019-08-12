@@ -19,12 +19,12 @@ const User = require('../models/users');
  * @access  Public
  */
 router.post('/login', (req, res, next) => {
-    const error = loginValidator(req.body);
+    const { errors, passed } = loginValidator(req.body);
 
     // check if validation passed
-    if (error.passed === 'no') {
+    if (!passed) {
         // send validation errors
-        return res.json(error);
+        return res.status(400).json(errors);
     }
 
     // find user with incoming username
@@ -32,8 +32,8 @@ router.post('/login', (req, res, next) => {
     User.findOne({ where: { username: req.body.username } }).then(user => {
         if (!user) {
             // if a user is not found
-            error.user = 'user with this username was not found';
-            return res.status(400).json(error);
+            errors.user = 'user with this username was not found';
+            return res.status(400).json(errors);
         }
 
         // compare incoming & db password
@@ -66,8 +66,8 @@ router.post('/login', (req, res, next) => {
                 );
             } else {
                 // password incorrect send back error msg
-                error.password = 'password was incorrect';
-                return res.status(400).json(error);
+                errors.password = 'password was incorrect';
+                return res.status(400).json(errors);
             }
         });
     });
@@ -79,12 +79,12 @@ router.post('/login', (req, res, next) => {
  * @access  Public
  */
 router.post('/register', (req, res, next) => {
-    const error = registerValidator(req.body);
+    const { errors, passed } = registerValidator(req.body);
 
     // check if validation passed
-    if (error.passed === 'no') {
+    if (!passed) {
         // send validation errors
-        return res.json(error);
+        return res.status(400).json(errors);
     }
 
     // TODO: using the same email won't give an appropriate error yet
@@ -105,18 +105,18 @@ router.post('/register', (req, res, next) => {
                 .then(([user, created]) => {
                     if (!created) {
                         // user already exists throw error
-                        error.user = `User with the following username: ${
+                        errors.user = `User with the following username: ${
                             user.username
                         } already exists`;
-                        return res.status(400).json(error);
+                        return res.status(400).json(errors);
                     } else {
                         // return registered user
                         return res.json(user);
                     }
                 })
                 .catch(err => {
-                    error.db = err;
-                    return res.status(400).json(err);
+                    errors.database = err;
+                    return res.status(400).json(errors);
                 });
         });
     });

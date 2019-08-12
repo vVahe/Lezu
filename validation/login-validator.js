@@ -7,6 +7,8 @@ const validator = require('validator');
  */
 module.exports = validate = input => {
     const errors = {};
+    let passed = true;
+
     const { username, password } = input;
 
     // check if any input is left empty
@@ -19,8 +21,8 @@ module.exports = validate = input => {
     // check if any errors were found while validating
     if (Object.keys(errors).length > 0) {
         // add validation not passed
-        errors.passed = 'no';
+        passed = false;
     }
 
-    return errors;
+    return { errors, passed };
 };
