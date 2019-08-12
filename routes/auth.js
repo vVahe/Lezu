@@ -5,6 +5,7 @@ const passport = require('passport');
 
 // import validators
 const registerValidator = require('../validation/register-validator');
+const loginValidator = require('../validation/login-validator');
 
 const keys = require('../util/keys');
 const router = express.Router();
@@ -18,10 +19,16 @@ const User = require('../models/users');
  * @access  Public
  */
 router.post('/login', (req, res, next) => {
-    const error = {};
+    const error = loginValidator(req.body);
+
+    // check if validation passed
+    if (error.passed === 'no') {
+        // send validation errors
+        return res.json(error);
+    }
+
     // find user with incoming username
     // TODO: login with email
-
     User.findOne({ where: { username: req.body.username } }).then(user => {
         if (!user) {
             // if a user is not found
