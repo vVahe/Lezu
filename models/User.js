@@ -2,8 +2,15 @@ const Sequelize = require('sequelize');
 const sequelize = require('../util/db');
 
 /**
- * Define users table
- * @created_at & @updated_at columns automatically added by ORM
+ * The following model defines the user schema
+ * @user_id     : id of the user
+ * @first_name  : first name of the user
+ * @last_name   : last name of the user
+ * @username    : username of the user
+ * @email       : email of the user
+ * @password    : password of the user (hashed)
+ * @created_at  : time user is created (auto-generated)
+ * @updated_at  : time user is updated (auto-generated)
  */
 const User = sequelize.define(
     'users',

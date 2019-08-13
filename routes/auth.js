@@ -11,7 +11,7 @@ const keys = require('../util/keys');
 const router = express.Router();
 
 /** Load User model */
-const User = require('../models/users');
+const User = require('../models/User');
 
 /**
  * @route   POST /auth/login

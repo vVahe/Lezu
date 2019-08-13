@@ -5,17 +5,23 @@ const passport = require('passport');
 const sequelize = require('./util/db');
 
 // import models
-const User = require('./models/users');
-const Word = require('./models/words');
+const User = require('./models/User');
+const Word = require('./models/Word');
+const Language = require('./models/Language');
+const Category = require('./models/Category');
 
-//set model associations
-User.belongsToMany(Word, {
-    through: 'UserWords',
-    foreignKey: 'user_id',
+// adds foreign key "language_id" to words table
+Language.hasMany(Word, { foreignKey: 'language_id' });
+// adds foreign key "user_id" to words table
+User.hasMany(Word, { foreignKey: 'user_id', onDelete: 'cascade' });
+// create bridge table between categories and words
+Category.belongsToMany(Word, {
+    through: 'WordCategory',
+    foreignKey: 'category_id',
     onDelete: 'cascade'
 });
-Word.belongsToMany(User, {
-    through: 'UserWords',
+Word.belongsToMany(Category, {
+    through: 'WordCategory',
     foreignKey: 'word_id',
     onDelete: 'cascade'
 });
