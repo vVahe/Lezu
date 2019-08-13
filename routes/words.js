@@ -74,7 +74,25 @@ router.post(
 router.get(
     '/all_words',
     passport.authenticate('jwt', { session: false }),
-    (req, res, next) => {}
+    (req, res, next) => {
+        const errors = {};
+
+        // find all words
+        Word.findAll({ where: { user_id: req.user.user_id } })
+            .then(words => {
+                // if no words were found return error
+                if (Object.keys(words).length === 0) {
+                    errors.words = 'no words found';
+                    return res.status(400).json(errors);
+                }
+
+                // else return found words
+                return res.json(words);
+            })
+            .catch(err => {
+                return res.status(400).json(err);
+            });
+    }
 );
 
 module.exports = router;
