@@ -2,8 +2,10 @@ const express = require('express');
 const passport = require('passport');
 const router = express.Router();
 
+// import validators
+const addWordValidator = require('../validation/add-word-validator');
+
 const Word = require('../models/Word');
-// const User = require('../models/User');
 const Category = require('../models/Category');
 
 /**
@@ -15,7 +17,12 @@ router.post(
     '/add_word',
     passport.authenticate('jwt', { session: false }),
     (req, res, next) => {
-        const errors = {};
+        const { errors, passed } = addWordValidator(req.body);
+
+        if (!passed) {
+            // validation did not pass send error
+            return res.status(400).json(errors);
+        }
 
         const { word, word_meaning, language_id, categories } = req.body;
         const new_word = {
