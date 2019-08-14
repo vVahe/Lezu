@@ -1,6 +1,7 @@
 const express = require('express');
 const passport = require('passport');
 const router = express.Router();
+const sequelize = require('../util/db');
 
 // import validators
 const addWordValidator = require('../validation/add-word-validator');
@@ -194,22 +195,43 @@ router.post(
  * @route   POST /words/update_word_categories/:word_id
  * @desc    Update a word categories
  * @access  Private
+ * FIXME: could be optimized maybe?
+ * TODO: may need to add validation for categories
  */
 router.post(
-    '/update_word/:word_id',
+    '/update_word_categories/:word_id',
     passport.authenticate('jwt', { session: false }),
-    (req, res, next) => {}
-);
-
-/**
- * @route   POST /words/update_word_reviewing/:word_id
- * @desc    Update review stats of a word
- * @access  Private
- */
-router.post(
-    '/update_word/:word_id',
-    passport.authenticate('jwt', { session: false }),
-    (req, res, next) => {}
+    (req, res, next) => {
+        // delete all categories associated with the word
+        sequelize
+            .model('WordCategory')
+            .destroy({
+                where: { word_id: req.params.word_id }
+            })
+            .then(result => {
+                // find the word
+                Word.findByPk(req.params.word_id)
+                    .then(word => {
+                        // add categories in wordcategory associations table
+                        const categoryArray = req.body.categories.split(',');
+                        categoryArray.forEach(category_id => {
+                            Category.findByPk(parseInt(category_id)).then(
+                                category => {
+                                    word.addCategory(category);
+                                }
+                            );
+                        });
+                        return res.json('categories successfully added');
+                    })
+                    .catch(err => {
+                        return res.status(400).json(err);
+                    });
+            })
+            .catch(err => {
+                return res.status(400).json(err);
+            });
+        // add all categories
+    }
 );
 
 module.exports = router;
