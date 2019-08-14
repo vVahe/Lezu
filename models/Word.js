@@ -1,9 +1,6 @@
 const Sequelize = require('sequelize');
 const sequelize = require('../util/db');
 
-const Language = require('./Language');
-const User = require('./User');
-
 /**
  * The following model defines the word schema
  * @word_id         : id of @word

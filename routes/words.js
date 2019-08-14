@@ -95,4 +95,121 @@ router.get(
     }
 );
 
+/**
+ * @route   POST /words/delete_word/:word_id
+ * @desc    Delete a word
+ * @access  Private
+ */
+router.post(
+    '/delete_word/:word_id',
+    passport.authenticate('jwt', { session: false }),
+    (req, res, next) => {
+        const errors = {};
+        Word.destroy({ where: { word_id: req.params.word_id } })
+            .then(result => {
+                if (result) {
+                    return res.json({
+                        word_delete: 'word succesfully deleted'
+                    });
+                }
+
+                errors.delete_word = 'word does not exist';
+                return res.status(404).json(errors);
+            })
+            .catch(err => {
+                return res.status(400).json(err);
+            });
+    }
+);
+
+/**
+ * @route   POST /words/delete_all
+ * @desc    Delete all words
+ * @access  Private
+ */
+router.post(
+    '/delete_all',
+    passport.authenticate('jwt', { session: false }),
+    (req, res, next) => {
+        const errors = {};
+        Word.destroy({ where: { user_id: req.user.user_id } })
+            .then(result => {
+                if (result) {
+                    return res.json({
+                        word_delete: 'all words deleted'
+                    });
+                }
+
+                errors.delete_word = 'no words found to delete';
+                return res.status(404).json(errors);
+            })
+            .catch(err => {
+                return res.status(400).json(err);
+            });
+    }
+);
+
+/**
+ * @route   POST /words/update_word/:word_id
+ * @desc    Update a word
+ * @access  Private
+ */
+router.post(
+    '/update_word/:word_id',
+    passport.authenticate('jwt', { session: false }),
+    (req, res, next) => {
+        console.log(req.body);
+        const { errors, passed } = addWordValidator(req.body);
+
+        if (!passed) {
+            return res.status(400).json(errors);
+        }
+
+        const { word, word_meaning, language_id } = req.body;
+        const updatedWord = {
+            word,
+            word_meaning,
+            language_id
+        };
+
+        Word.update(updatedWord, { where: { word_id: req.params.word_id } })
+            .then(result => {
+                if (result) {
+                    console.log(result);
+                    return res.json({
+                        word_delete: 'word successfully updated'
+                    });
+                }
+
+                errors.update_word = 'failed to update word';
+                return res.status(404).json(errors);
+            })
+            .catch(err => {
+                return res.status(400).json(err);
+            });
+    }
+);
+
+/**
+ * @route   POST /words/update_word_categories/:word_id
+ * @desc    Update a word categories
+ * @access  Private
+ */
+router.post(
+    '/update_word/:word_id',
+    passport.authenticate('jwt', { session: false }),
+    (req, res, next) => {}
+);
+
+/**
+ * @route   POST /words/update_word_reviewing/:word_id
+ * @desc    Update review stats of a word
+ * @access  Private
+ */
+router.post(
+    '/update_word/:word_id',
+    passport.authenticate('jwt', { session: false }),
+    (req, res, next) => {}
+);
+
 module.exports = router;

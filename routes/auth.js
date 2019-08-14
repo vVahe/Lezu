@@ -123,20 +123,6 @@ router.post('/register', (req, res, next) => {
 });
 
 /**
- * @route   GET /auth/current
- * @desc    Returns the currently logged in user
- * @access  Private
- * TODO: remove in production
- */
-router.get(
-    '/current',
-    passport.authenticate('jwt', { session: false }),
-    (req, res) => {
-        res.json(req.user);
-    }
-);
-
-/**
  * @route   GET /auth/logout
  * @desc    Logout user
  * @access  Private
