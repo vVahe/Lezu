@@ -39,3 +39,7 @@
 .footer > p {
     line-height: 100px;
 }
+
+.register-form {
+    width: 50%;
+}

@@ -14,7 +14,7 @@ function App() {
             <div className="App">
                 <Navbar />
                 <Route exact path="/" component={Landing} />
-                <div className="container">
+                <div className="container mx-auto">
                     <Route exact path="/register" component={Register} />
                     <Route exact path="/login" component={Login} />
                 </div>
