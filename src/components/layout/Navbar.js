@@ -1,29 +1,21 @@
 import React, { Component } from 'react';
+import { Link, NavLink } from 'react-router-dom';
 
 class Navbar extends Component {
     render() {
         return (
             <nav className="navbar navbar-expand-lg navbar-light bg-light">
                 <nav className="navbar navbar-light bg-light">
-                    <a className="navbar-brand" href="#">
-                        <img
-                            src=""
-                            width="30"
-                            height="30"
-                            className="d-inline-block align-top"
-                            alt=""
-                        />
+                    <Link to="/" className="navbar-brand">
+                        <i className="fa fa-spinner fa-spin px-2" />
                         Word-Trainer
-                    </a>
+                    </Link>
                 </nav>
                 <button
                     className="navbar-toggler"
                     type="button"
                     data-toggle="collapse"
                     data-target="#navbarCollapse"
-                    aria-controls="navbarCollapse"
-                    aria-expanded="false"
-                    aria-label="Toggle navigation"
                 >
                     <span className="navbar-toggler-icon" />
                 </button>
@@ -31,36 +23,44 @@ class Navbar extends Component {
                 <div className="collapse navbar-collapse" id="navbarCollapse">
                     <ul className="navbar-nav mr-auto">
                         <li className="nav-item">
-                            <a className="nav-link" href="#">
+                            <NavLink to="/explained" className="nav-link">
                                 What is it ?
-                                <span className="sr-only">(current)</span>
-                            </a>
+                            </NavLink>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#">
+                            <NavLink to="/profile" className="nav-link">
                                 Profile
-                            </a>
+                            </NavLink>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#">
+                            <NavLink to="word-list" className="nav-link">
                                 Word List
-                            </a>
+                            </NavLink>
                         </li>
 
                         <li className="nav-item">
-                            <a className="nav-link" href="#">
+                            <NavLink to="training" className="nav-link">
                                 Train
-                            </a>
+                            </NavLink>
                         </li>
                     </ul>
-                    <form className="form-inline my-2 my-lg-0">
+
+                    <Link to="/login">
                         <button
-                            className="btn btn-outline-success my-2 my-sm-0"
+                            className="btn btn-outline-success m-2 my-sm-0"
                             type="submit"
                         >
                             Login
                         </button>
-                    </form>
+                    </Link>
+                    <Link to="/register">
+                        <button
+                            className="btn btn-outline-primary m-2 my-sm-0"
+                            type="submit"
+                        >
+                            Register
+                        </button>
+                    </Link>
                 </div>
             </nav>
         );
