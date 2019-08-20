@@ -5,7 +5,7 @@ class Register extends Component {
         return (
             <div className="card register-form mx-auto my-5 shadow-lg">
                 <div className="card-header">
-                    <h3>REGISTER</h3>
+                    <h3>Register</h3>
                 </div>
                 <div class="card-body">
                     <p className="lead">Create your own Word-Trainer account</p>
