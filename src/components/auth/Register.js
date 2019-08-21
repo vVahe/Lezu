@@ -1,6 +1,26 @@
 import React, { Component } from 'react';
 
 class Register extends Component {
+    state = {
+        firstName: '',
+        lastName: '',
+        username: '',
+        email: '',
+        password: '',
+        passwordRepeat: '',
+        errors: {}
+    };
+
+    onChange = e => {
+        this.setState({
+            [e.target.name]: e.target.value
+        });
+    };
+
+    onSubmit = e => {
+        e.preventDefault();
+    };
+
     render() {
         return (
             <div className="card register-form mx-auto my-5 shadow-lg">
@@ -9,17 +29,20 @@ class Register extends Component {
                 </div>
                 <div class="card-body">
                     <p className="lead">Create your own Word-Trainer account</p>
-                    <form>
+                    <form onSubmit={this.onSubmit}>
                         <div class="col-auto my-4">
                             <label class="sr-only" htmlFor="first-name">
                                 First name
                             </label>
 
                             <input
+                                name="firstName"
                                 type="text"
                                 class="form-control"
                                 id="first-name"
                                 placeholder="First name"
+                                value={this.state.firstName}
+                                onChange={this.onChange}
                             />
                         </div>
 
@@ -29,10 +52,13 @@ class Register extends Component {
                             </label>
 
                             <input
+                                name="lastName"
                                 type="text"
                                 class="form-control"
                                 id="last-name"
                                 placeholder="Last name"
+                                value={this.state.lastName}
+                                onChange={this.onChange}
                             />
                         </div>
                         <div class="col-auto my-4">
@@ -46,10 +72,13 @@ class Register extends Component {
                                     </div>
                                 </div>
                                 <input
+                                    name="username"
                                     type="text"
                                     class="form-control"
                                     id="username"
                                     placeholder="username"
+                                    value={this.state.username}
+                                    onChange={this.onChange}
                                 />
                             </div>
                         </div>
@@ -65,10 +94,13 @@ class Register extends Component {
                                     </div>
                                 </div>
                                 <input
+                                    name="email"
                                     type="email"
                                     class="form-control"
                                     id="email"
                                     placeholder="email"
+                                    value={this.state.email}
+                                    onChange={this.onChange}
                                 />
                             </div>
                         </div>
@@ -84,10 +116,13 @@ class Register extends Component {
                                     </div>
                                 </div>
                                 <input
+                                    name="password"
                                     type="text"
                                     class="form-control"
                                     id="password"
                                     placeholder="password"
+                                    value={this.state.password}
+                                    onChange={this.onChange}
                                 />
                             </div>
                         </div>
@@ -103,10 +138,13 @@ class Register extends Component {
                                     </div>
                                 </div>
                                 <input
+                                    name="passwordRepeat"
                                     type="text"
                                     class="form-control"
                                     id="password-repeat"
                                     placeholder="password repeat"
+                                    value={this.state.passwordRepeat}
+                                    onChange={this.onChange}
                                 />
                             </div>
                         </div>

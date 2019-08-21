@@ -2,6 +2,21 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 class Login extends Component {
+    state = {
+        username: '',
+        password: ''
+    };
+
+    onSubmit = e => {
+        e.preventDefault();
+    };
+
+    onChange = e => {
+        this.setState({
+            [e.target.name]: e.target.value
+        });
+    };
+
     render() {
         return (
             <div className="card register-form mx-auto my-5 shadow-lg">
@@ -10,7 +25,7 @@ class Login extends Component {
                 </div>
                 <div class="card-body">
                     <p className="lead">Login to your Word-Trainer account</p>
-                    <form className="my-4">
+                    <form className="my-4" onSubmit={this.onSubmit}>
                         <div class="col-auto my-4">
                             <label class="sr-only" htmlFor="username">
                                 Username
@@ -22,10 +37,13 @@ class Login extends Component {
                                     </div>
                                 </div>
                                 <input
+                                    name="username"
                                     type="text"
                                     class="form-control"
                                     id="username"
                                     placeholder="username"
+                                    value={this.state.username}
+                                    onChange={this.onChange}
                                 />
                             </div>
                         </div>
@@ -41,10 +59,13 @@ class Login extends Component {
                                     </div>
                                 </div>
                                 <input
+                                    name="password"
                                     type="text"
                                     class="form-control"
                                     id="password"
                                     placeholder="password"
+                                    value={this.state.password}
+                                    onChange={this.onChange}
                                 />
                             </div>
                         </div>
@@ -60,7 +81,7 @@ class Login extends Component {
                         <p className="d-inline">Forgot password?</p>
                     </Link>
                     <p className="d-inline mx-4">|</p>
-                    <Link to="/forgot-password" className="d-inline">
+                    <Link to="/register" className="d-inline">
                         <p className="d-inline">No account? Register here!</p>
                     </Link>
                 </div>
