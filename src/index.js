@@ -7,6 +7,7 @@ import thunk from 'redux-thunk';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
+// import css styles
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.js';
 import 'font-awesome/css/font-awesome.min.css';
@@ -14,10 +15,12 @@ import './index.css';
 
 // import reducers
 import authReducer from './store/reducers/authReducer';
+import errorsReducer from './store/reducers/errorReducer';
 
 // combine reducer to root reducer
 const rootReducer = combineReducers({
-    auth: authReducer
+    auth: authReducer,
+    errors: errorsReducer
 });
 
 //enable redux DevTools for browser
