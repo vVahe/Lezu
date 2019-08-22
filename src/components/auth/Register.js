@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { registerUser } from '../../store/actions/authActions';
 
 class Register extends Component {
     state = {
@@ -11,17 +14,35 @@ class Register extends Component {
         errors: {}
     };
 
+    // handle form input changes to component state
     onChange = e => {
         this.setState({
             [e.target.name]: e.target.value
         });
     };
 
+    // handle form submit for registering
     onSubmit = e => {
         e.preventDefault();
+
+        // create new user object
+        const newUser = {
+            username: this.state.username,
+            first_name: this.state.firstName,
+            last_name: this.state.lastName,
+            email: this.state.email,
+            password: this.state.password,
+            password_repeat: this.state.passwordRepeat
+        };
+
+        this.props.registerUser(newUser);
     };
 
     render() {
+        const { errors } = this.state;
+
+        const { user } = this.props.auth;
+
         return (
             <div className="card register-form mx-auto my-5 shadow-lg">
                 <div className="card-header">
@@ -158,4 +179,16 @@ class Register extends Component {
     }
 }
 
-export default Register;
+Register.prototype = {
+    registerUser: PropTypes.func.isRequired,
+    auth: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+    auth: state.auth
+});
+
+export default connect(
+    mapStateToProps,
+    { registerUser }
+)(Register);
