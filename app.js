@@ -32,6 +32,7 @@ const port = 3000;
 /** routers */
 const authRouter = require('./routes/auth');
 const wordsRouter = require('./routes/words');
+const profileRouter = require('./routes/profile');
 
 /** Body parser middleware */
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -43,6 +44,7 @@ require('./util/passport')(passport);
 
 app.use('/auth', authRouter);
 app.use('/words', wordsRouter);
+app.use('/profile', profileRouter);
 
 app.listen(port, () => {
     console.log(`express listening on port ${port}`);
