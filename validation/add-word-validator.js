@@ -13,24 +13,24 @@ module.exports = validate = input => {
 
     // check if word length is less than 24 characters
     if (!validator.isLength(word.trim(), { max: 24 })) {
-        errors.word = 'word can be at most 24 characters';
+        errors.word = 'Word can be at most 24 characters';
     }
 
     // check if word_meaning length is less than 36 characters
     if (!validator.isLength(word.trim(), { max: 36 })) {
-        errors.word = 'word meaning can be at most 36 characters';
+        errors.word = 'Word meaning can be at most 36 characters';
     }
 
     // check if word is filled in
-    if (validator.isEmpty(word.trim())) errors.word = 'word field is required';
+    if (validator.isEmpty(word.trim())) errors.word = 'Word field is required';
 
     // check if word meaning is filled in
     if (validator.isEmpty(word_meaning.trim()))
-        errors.word_meaning = 'word meaning is required';
+        errors.word_meaning = 'Word meaning is required';
 
     // check if language is selected
     if (validator.isEmpty(language_id + ''))
-        errors.language = 'select a language';
+        errors.language = 'Select a language';
 
     // check if any errors were found while validating
     if (Object.keys(errors).length > 0) {

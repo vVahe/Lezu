@@ -32,7 +32,7 @@ router.post('/login', (req, res, next) => {
     User.findOne({ where: { username: req.body.username } }).then(user => {
         if (!user) {
             // if a user is not found
-            errors.user = 'user with this username was not found';
+            errors.user = 'User with this username was not found';
             return res.status(400).json(errors);
         }
 
@@ -66,7 +66,7 @@ router.post('/login', (req, res, next) => {
                 );
             } else {
                 // password incorrect send back error msg
-                errors.password = 'password was incorrect';
+                errors.password = 'Password was incorrect';
                 return res.status(400).json(errors);
             }
         });

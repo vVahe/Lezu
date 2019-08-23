@@ -13,10 +13,10 @@ module.exports = validate = input => {
 
     // check if any input is left empty
     if (validator.isEmpty(username.trim()))
-        errors.username = 'username is required';
+        errors.username = 'Username is required';
 
     // check if password is filled in
-    if (validator.isEmpty(password)) errors.password = 'password is required';
+    if (validator.isEmpty(password)) errors.password = 'Password is required';
 
     // check if any errors were found while validating
     if (Object.keys(errors).length > 0) {
