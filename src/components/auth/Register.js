@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
 
@@ -29,15 +30,15 @@ class Register extends Component {
 
         // create new user object
         const newUser = {
-            username: this.state.username,
+            username: this.state.username.toLowerCase(),
             first_name: this.state.first_name,
             last_name: this.state.last_name,
-            email: this.state.email,
+            email: this.state.email.toLowerCase(),
             password: this.state.password,
             password_repeat: this.state.password_repeat
         };
 
-        this.props.registerUser(newUser);
+        this.props.registerUser(newUser, this.props.history);
     };
 
     // set the errors to component state before
@@ -251,4 +252,4 @@ const mapStateToProps = state => ({
 export default connect(
     mapStateToProps,
     { registerUser }
-)(Register);
+)(withRouter(Register));

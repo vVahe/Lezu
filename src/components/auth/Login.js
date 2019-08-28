@@ -1,14 +1,27 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { loginUser } from '../../store/actions/authActions';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+import classnames from 'classnames';
+import PropTypes from 'prop-types';
 
 class Login extends Component {
     state = {
         username: '',
-        password: ''
+        password: '',
+        errors: {}
     };
 
     onSubmit = e => {
         e.preventDefault();
+
+        const loginDetails = {
+            username: this.state.username.toLowerCase(),
+            password: this.state.password
+        };
+
+        this.props.loginUser(loginDetails, this.props.history);
     };
 
     onChange = e => {
@@ -17,7 +30,20 @@ class Login extends Component {
         });
     };
 
+    componentDidUpdate(prevProps) {
+        if (
+            JSON.stringify(this.props.errors) !==
+            JSON.stringify(prevProps.errors)
+        ) {
+            this.setState({
+                errors: this.props.errors
+            });
+        }
+    }
+
     render() {
+        const { errors } = this.state;
+
         return (
             <div className="card register-form mx-auto my-5 shadow-lg">
                 <div className="card-header">
@@ -25,53 +51,67 @@ class Login extends Component {
                 </div>
                 <div class="card-body">
                     <p className="lead">Login to your Word-Trainer account</p>
-                    <form className="my-4" onSubmit={this.onSubmit}>
-                        <div class="col-auto my-4">
-                            <label class="sr-only" htmlFor="username">
+                    <form className="my-4" noValidate onSubmit={this.onSubmit}>
+                        <div className="col-auto my-4">
+                            <label className="sr-only" htmlFor="username">
                                 Username
                             </label>
-                            <div class="input-group mb-2">
-                                <div class="input-group-prepend">
-                                    <div class="input-group-text">
+                            <div className="input-group">
+                                <div className="input-group-prepend">
+                                    <div className="input-group-text">
                                         <i className="fa fa-user" />
                                     </div>
                                 </div>
                                 <input
                                     name="username"
                                     type="text"
-                                    class="form-control"
+                                    className={classnames('form-control', {
+                                        'is-invalid': errors.username
+                                    })}
                                     id="username"
                                     placeholder="username"
                                     value={this.state.username}
                                     onChange={this.onChange}
                                 />
                             </div>
+                            {errors.username && (
+                                <div className="invalid-feeback float-left text-danger mb-2 mt-1">
+                                    {errors.username}
+                                </div>
+                            )}
                         </div>
 
-                        <div class="col-auto my-4">
-                            <label class="sr-only" htmlFor="password">
+                        <div className="col-auto my-4">
+                            <label className="sr-only" htmlFor="password">
                                 Password
                             </label>
-                            <div class="input-group mb-2">
-                                <div class="input-group-prepend">
-                                    <div class="input-group-text">
+                            <div className="input-group">
+                                <div className="input-group-prepend">
+                                    <div className="input-group-text">
                                         <i className="fa fa-key" />
                                     </div>
                                 </div>
                                 <input
                                     name="password"
                                     type="text"
-                                    class="form-control"
+                                    className={classnames('form-control', {
+                                        'is-invalid': errors.password
+                                    })}
                                     id="password"
                                     placeholder="password"
                                     value={this.state.password}
                                     onChange={this.onChange}
                                 />
                             </div>
+                            {errors.password && (
+                                <div className="invalid-feeback float-left text-danger mb-2 mt-1">
+                                    {errors.password}
+                                </div>
+                            )}
                         </div>
 
                         <button
-                            className="btn btn-primary btn-block w-50 mx-auto"
+                            className="btn btn-primary btn-block w-50 mx-auto mt-5"
                             type="submit"
                         >
                             Login
@@ -90,4 +130,17 @@ class Login extends Component {
     }
 }
 
-export default Login;
+Login.proptype = {
+    loginUser: PropTypes.func.isRequired,
+    auth: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+    auth: state.auth,
+    errors: state.errors
+});
+
+export default connect(
+    mapStateToProps,
+    { loginUser }
+)(withRouter(Login));

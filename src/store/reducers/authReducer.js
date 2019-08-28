@@ -1,4 +1,5 @@
-import { REGISTER } from '../actions/types';
+import { SET_LOGGED_IN_USER } from '../actions/types';
+import isEmpty from '../../utils/isEmpty';
 
 const initialState = {
     isAuthenticated: false,
@@ -7,9 +8,10 @@ const initialState = {
 
 export default function(state = initialState, action) {
     switch (action.type) {
-        case REGISTER:
+        case SET_LOGGED_IN_USER:
             return {
                 ...state,
+                isAuthenticated: !isEmpty(action.payload),
                 user: action.payload
             };
         default:
