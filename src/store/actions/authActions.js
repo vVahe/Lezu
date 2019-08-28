@@ -17,7 +17,7 @@ export const registerUser = (userData, history) => dispatch => {
 };
 
 // Get JWToken for user
-export const loginUser = (userData, history) => dispatch => {
+export const loginUser = userData => dispatch => {
     axios
         .post('/auth/login', userData)
         .then(res => {
@@ -31,8 +31,6 @@ export const loginUser = (userData, history) => dispatch => {
             const decodedToken = jwtDecode(token);
             // set user in local state
             dispatch({ type: SET_LOGGED_IN_USER, payload: decodedToken });
-            // redirect user homepage
-            history.push('/dashboard');
         })
         .catch(err => {
             dispatch({

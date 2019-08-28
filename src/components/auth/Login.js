@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { loginUser } from '../../store/actions/authActions';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 
@@ -21,7 +20,7 @@ class Login extends Component {
             password: this.state.password
         };
 
-        this.props.loginUser(loginDetails, this.props.history);
+        this.props.loginUser(loginDetails);
     };
 
     onChange = e => {
@@ -38,6 +37,10 @@ class Login extends Component {
             this.setState({
                 errors: this.props.errors
             });
+        }
+
+        if (this.props.auth.isAuthenticated) {
+            this.props.history.push('/dashboard');
         }
     }
 
@@ -93,7 +96,7 @@ class Login extends Component {
                                 </div>
                                 <input
                                     name="password"
-                                    type="text"
+                                    type="password"
                                     className={classnames('form-control', {
                                         'is-invalid': errors.password
                                     })}
@@ -144,4 +147,4 @@ const mapStateToProps = state => ({
 export default connect(
     mapStateToProps,
     { loginUser }
-)(withRouter(Login));
+)(Login);

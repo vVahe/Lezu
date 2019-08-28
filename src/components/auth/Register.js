@@ -177,7 +177,7 @@ class Register extends Component {
                                 </div>
                                 <input
                                     name="password"
-                                    type="text"
+                                    type="password"
                                     className={classnames('form-control', {
                                         'is-invalid': errors.password
                                     })}
@@ -209,7 +209,7 @@ class Register extends Component {
                                 </div>
                                 <input
                                     name="password_repeat"
-                                    type="text"
+                                    type="password"
                                     className={classnames('form-control', {
                                         'is-invalid': errors.password_repeat
                                     })}
