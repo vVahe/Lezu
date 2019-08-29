@@ -40,9 +40,20 @@ export const loginUser = userData => dispatch => {
         });
 };
 
+// Set logged in user
 export const setLoggedInUser = currentUser => {
     return {
         type: SET_LOGGED_IN_USER,
         payload: currentUser
     };
+};
+
+// Log out user
+export const logoutUser = () => dispatch => {
+    // remove token from localstorage
+    localStorage.removeItem('jwtToken');
+    // remove the auth header
+    setAuthToken(false);
+    // remove user from local state and remove authentication
+    dispatch(setLoggedInUser({}));
 };

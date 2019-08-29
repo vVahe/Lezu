@@ -1,9 +1,14 @@
-const isEmpty = element => {
+/** Custom method to check if value is empty
+    @param value
+    @returns boolean: TRUE if value is empty, FALSE value is not empty
+    @modifies none
+*/
+const isEmpty = value => {
     return (
-        element === undefined ||
-        element === null ||
-        (typeof element === 'object' && Object.keys(element).length === 0) ||
-        (typeof element === 'string' && element.trim().length === 0)
+        value === undefined ||
+        value === null ||
+        (typeof value === 'object' && Object.keys(value).length === 0) ||
+        (typeof value === 'string' && value.trim().length === 0)
     );
 };
 

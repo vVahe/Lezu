@@ -1,6 +1,12 @@
 import axios from 'axios';
 
-// set axios header config
+/** Set axios header config, when the user is authenticated autocatically
+    add the token to the authorization header of every HTTP request. If the user is
+    unauthenticated remove the authorization header 
+    @param token of the logged in user 
+    @modifies headers of axios calls 
+    @returns none 
+*/
 const setAuthToken = token => {
     if (token) {
         // Apply auth header to every request
