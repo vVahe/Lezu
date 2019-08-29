@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import jwtDecode from 'jwt-decode';
 import setAuthToken from './utils/setAuthToken';
-import { setLoggedInUser } from './store/actions/authActions';
+import { setLoggedInUser, loginUser } from './store/actions/authActions';
 import { connect } from 'react-redux';
 import { BrowserRouter, Route } from 'react-router-dom';
 import './App.css';
@@ -15,14 +15,23 @@ import Dashboard from './components/dashboard/Dashboard';
 
 class App extends Component {
     componentDidMount() {
+        const token = localStorage.getItem('jwtToken');
         // check for token
-        if (localStorage.getItem('jwtToken')) {
+        if (token) {
             // set auth token header auth
-            setAuthToken(localStorage.getItem('jwtToken'));
+            setAuthToken(token);
             // decode token
-            const decodedToken = jwtDecode(localStorage.getItem('jwtToken'));
+            const decodedToken = jwtDecode(token);
             // set logged in user
             this.props.setLoggedInUser(decodedToken);
+
+            // check for expiration of token
+            if (token.exp < Math.floor(new Date().getTime() / 1000)) {
+                this.props.loginUser();
+                // TODO: clear any other state
+                // redirect to landing page
+                window.location.href = '/';
+            }
         }
     }
 

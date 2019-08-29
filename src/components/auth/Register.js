@@ -41,6 +41,15 @@ class Register extends Component {
         this.props.registerUser(newUser, this.props.history);
     };
 
+    // FIXME: not working for some reason
+    componentDidMount() {
+        console.log(this.props.auth.isAuthenticated);
+        if (this.props.auth.isAuthenticated) {
+            console.log('happens 2');
+            this.props.history.push('/dashboard');
+        }
+    }
+
     // set the errors to component state before
     componentDidUpdate(prevProps) {
         if (
@@ -50,6 +59,10 @@ class Register extends Component {
             this.setState({
                 errors: this.props.errors
             });
+        }
+
+        if (this.props.auth.isAuthenticated) {
+            this.props.history.push('/dashboard');
         }
     }
 
