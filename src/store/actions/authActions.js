@@ -30,7 +30,7 @@ export const loginUser = userData => dispatch => {
             // decode jwt token
             const decodedToken = jwtDecode(token);
             // set user in local state
-            dispatch({ type: SET_LOGGED_IN_USER, payload: decodedToken });
+            dispatch(setLoggedInUser(decodedToken));
         })
         .catch(err => {
             dispatch({
@@ -38,4 +38,11 @@ export const loginUser = userData => dispatch => {
                 payload: err.response.data
             });
         });
+};
+
+export const setLoggedInUser = currentUser => {
+    return {
+        type: SET_LOGGED_IN_USER,
+        payload: currentUser
+    };
 };
