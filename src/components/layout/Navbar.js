@@ -43,12 +43,14 @@ class Navbar extends Component {
                         <p>{user.username}</p>
                     </li>
                     <li className="nav-item">
-                        <button
-                            className="btn btn-outline-primary m-2 my-sm-0"
-                            onClick={this.logoutHandler}
-                        >
-                            Logout
-                        </button>
+                        <Link to="/">
+                            <button
+                                className="btn btn-outline-primary m-2 my-sm-0"
+                                onClick={this.logoutHandler}
+                            >
+                                Logout
+                            </button>
+                        </Link>
                     </li>
                 </ul>
             </div>
