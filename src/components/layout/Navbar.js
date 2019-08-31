@@ -1,8 +1,88 @@
 import React, { Component } from 'react';
 import { Link, NavLink } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { logoutUser } from '../../store/actions/authActions';
 
 class Navbar extends Component {
+    logoutHandler = () => {
+        this.props.logoutUser();
+    };
+
     render() {
+        const { isAuthenticated, user } = this.props.auth;
+
+        const authLinks = (
+            <div className="collapse navbar-collapse" id="navbarCollapse">
+                <ul className="navbar-nav mr-auto">
+                    <li className="nav-item">
+                        <NavLink to="/dashboard" className="nav-link">
+                            Dashboard
+                        </NavLink>
+                    </li>
+                    <li className="nav-item">
+                        <NavLink to="/profile" className="nav-link">
+                            Profile
+                        </NavLink>
+                    </li>
+                    <li className="nav-item">
+                        <NavLink to="word-list" className="nav-link">
+                            Word List
+                        </NavLink>
+                    </li>
+
+                    <li className="nav-item">
+                        <NavLink to="training" className="nav-link">
+                            Train
+                        </NavLink>
+                    </li>
+                </ul>
+
+                <ul className="navbar-nav ml-auto">
+                    <li className="nav-item">
+                        <p>{user.username}</p>
+                    </li>
+                    <li className="nav-item">
+                        <Link to="/">
+                            <button
+                                className="btn btn-outline-primary m-2 my-sm-0"
+                                onClick={this.logoutHandler}
+                            >
+                                Logout
+                            </button>
+                        </Link>
+                    </li>
+                </ul>
+            </div>
+        );
+
+        const guestLinks = (
+            <div className="collapse navbar-collapse" id="navbarCollapse">
+                <ul className="navbar-nav ml-auto">
+                    <li className="nav-item">
+                        <Link to="/login">
+                            <button
+                                className="btn btn-outline-success m-2 my-sm-0"
+                                type="submit"
+                            >
+                                Login
+                            </button>
+                        </Link>
+                    </li>
+                    <li className="nav-item">
+                        <Link to="/register">
+                            <button
+                                className="btn btn-outline-primary m-2 my-sm-0"
+                                type="submit"
+                            >
+                                Register
+                            </button>
+                        </Link>
+                    </li>
+                </ul>
+            </div>
+        );
+
         return (
             <nav className="navbar navbar-expand-lg navbar-light bg-light">
                 <nav className="navbar navbar-light bg-light">
@@ -21,50 +101,23 @@ class Navbar extends Component {
                 </button>
 
                 <div className="collapse navbar-collapse" id="navbarCollapse">
-                    <ul className="navbar-nav mr-auto">
-                        <li className="nav-item">
-                            <NavLink to="/explained" className="nav-link">
-                                What is it ?
-                            </NavLink>
-                        </li>
-                        <li className="nav-item">
-                            <NavLink to="/profile" className="nav-link">
-                                Profile
-                            </NavLink>
-                        </li>
-                        <li className="nav-item">
-                            <NavLink to="word-list" className="nav-link">
-                                Word List
-                            </NavLink>
-                        </li>
-
-                        <li className="nav-item">
-                            <NavLink to="training" className="nav-link">
-                                Train
-                            </NavLink>
-                        </li>
-                    </ul>
-
-                    <Link to="/login">
-                        <button
-                            className="btn btn-outline-success m-2 my-sm-0"
-                            type="submit"
-                        >
-                            Login
-                        </button>
-                    </Link>
-                    <Link to="/register">
-                        <button
-                            className="btn btn-outline-primary m-2 my-sm-0"
-                            type="submit"
-                        >
-                            Register
-                        </button>
-                    </Link>
+                    {isAuthenticated ? authLinks : guestLinks}
                 </div>
             </nav>
         );
     }
 }
 
-export default Navbar;
+Navbar.propTypes = {
+    auth: PropTypes.object.isRequired,
+    logoutUser: PropTypes.func.isRequired
+};
+
+const mapStateToProps = state => ({
+    auth: state.auth
+});
+
+export default connect(
+    mapStateToProps,
+    { logoutUser }
+)(Navbar);
