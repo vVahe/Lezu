@@ -32,7 +32,7 @@ router.post('/login', (req, res, next) => {
     User.findOne({ where: { username: req.body.username } }).then(user => {
         if (!user) {
             // if a user is not found
-            errors.user = 'User with this username was not found';
+            errors.username = 'User with this username was not found';
             return res.status(400).json(errors);
         }
 
@@ -105,9 +105,7 @@ router.post('/register', (req, res, next) => {
                 .then(([user, created]) => {
                     if (!created) {
                         // user already exists throw error
-                        errors.user = `User with the following username: ${
-                            user.username
-                        } already exists`;
+                        errors.username = `Username already taken`;
                         return res.status(400).json(errors);
                     } else {
                         // return registered user
