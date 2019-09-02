@@ -15,11 +15,13 @@ import './index.css';
 
 // import reducers
 import authReducer from './store/reducers/authReducer';
+import wordlistReducer from './store/reducers/wordlistReducer';
 import errorsReducer from './store/reducers/errorReducer';
 
 // combine reducer to root reducer
 const rootReducer = combineReducers({
     auth: authReducer,
+    wordlist: wordlistReducer,
     errors: errorsReducer
 });
 
