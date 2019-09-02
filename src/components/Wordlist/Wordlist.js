@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { getWordlist } from '../../store/actions/wordlistActions';
-import axios from 'axios';
+import { getWordlist, deleteWord } from '../../store/actions/wordlistActions';
 
 import Word from './Word';
 
@@ -11,21 +10,8 @@ class Wordlist extends Component {
         this.props.getWordlist();
     }
 
-    shouldComponentUpdate(nextProps) {
-        if (nextProps.wordlist.loaded === this.props.wordlist.loaded) {
-            return false;
-        }
-        return true;
-    }
-
     deleteWordHandler = word_id => {
-        console.log(`fired with ${word_id}`);
-        axios
-            .post('/words/delete_word/' + word_id)
-            .then(res => {
-                console.log(res);
-            })
-            .catch(err => console.log(err));
+        this.props.deleteWord(word_id);
     };
 
     render() {
@@ -77,7 +63,7 @@ class Wordlist extends Component {
                                 );
                             })}
                         </tbody>
-                    </table>{' '}
+                    </table>
                 </div>
             </div>
         );
@@ -98,5 +84,5 @@ const mapStateToProps = state => ({
 
 export default connect(
     mapStateToProps,
-    { getWordlist }
+    { getWordlist, deleteWord }
 )(Wordlist);
