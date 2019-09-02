@@ -12,6 +12,7 @@ import Footer from './components/layout/Footer';
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
 import Dashboard from './components/dashboard/Dashboard';
+import Wordlist from './components/Wordlist/Wordlist';
 
 class App extends Component {
     componentDidMount() {
@@ -42,6 +43,7 @@ class App extends Component {
                     <Navbar />
                     <Route exact path="/" component={Landing} />
                     <Route exact path="/dashboard" component={Dashboard} />
+                    <Route exact path="/word-list" component={Wordlist} />
                     <div className="container mx-auto">
                         <Route exact path="/register" component={Register} />
                         <Route exact path="/login" component={Login} />

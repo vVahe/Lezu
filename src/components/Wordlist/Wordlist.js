@@ -1,10 +1,22 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { getWordlist } from '../../store/actions/wordlistActions';
 
 class Wordlist extends Component {
+    componentDidMount() {
+        this.props.getWordlist();
+    }
+
+    shouldComponentUpdate(nextProps) {
+        if (nextProps.wordlist.loaded === this.props.wordlist.loaded) {
+            return false;
+        }
+        return true;
+    }
+
     render() {
-        return <div></div>;
+        return <div>Word-list</div>;
     }
 }
 
@@ -22,5 +34,5 @@ const mapStateToProps = state => ({
 
 export default connect(
     mapStateToProps,
-    null
+    { getWordlist }
 )(Wordlist);
