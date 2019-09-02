@@ -14,13 +14,15 @@ import Login from './components/auth/Login';
 import Dashboard from './components/dashboard/Dashboard';
 import Wordlist from './components/Wordlist/Wordlist';
 
+// set auth token before any component renders
+if (localStorage.getItem('jwtToken')) {
+    setAuthToken(localStorage.getItem('jwtToken'));
+}
 class App extends Component {
     componentDidMount() {
         const token = localStorage.getItem('jwtToken');
         // check for token
         if (token) {
-            // set auth token header auth
-            setAuthToken(token);
             // decode token
             const decodedToken = jwtDecode(token);
             // set logged in user
@@ -28,7 +30,7 @@ class App extends Component {
 
             // check for expiration of token
             if (token.exp < Math.floor(new Date().getTime() / 1000)) {
-                this.props.loginUser();
+                this.props.logoutUser();
                 // TODO: clear any other state
                 // redirect to landing page
                 window.location.href = '/';
