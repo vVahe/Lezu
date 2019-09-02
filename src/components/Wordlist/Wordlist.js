@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { getWordlist } from '../../store/actions/wordlistActions';
+import axios from 'axios';
 
 import Word from './Word';
 
@@ -17,13 +18,24 @@ class Wordlist extends Component {
         return true;
     }
 
+    deleteWordHandler = word_id => {
+        console.log(`fired with ${word_id}`);
+        axios
+            .post('/words/delete_word/' + word_id)
+            .then(res => {
+                console.log(res);
+            })
+            .catch(err => console.log(err));
+    };
+
     render() {
         const { words } = this.props.wordlist;
         let rowNumber = 0;
 
         return (
-            <div>
-                <div className="container">
+            <div className="mt-5">
+                <h1>Word List</h1>
+                <div className="container mt-5">
                     <table className="table table-striped">
                         <thead className="thead-dark">
                             <tr>
@@ -42,6 +54,8 @@ class Wordlist extends Component {
                                 <th scope="col">
                                     <i className="fa fa-times"></i>
                                 </th>
+                                <th></th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -49,7 +63,8 @@ class Wordlist extends Component {
                                 rowNumber++;
                                 return (
                                     <Word
-                                        key={word.id}
+                                        key={word.word_id}
+                                        word_id={word.word_id}
                                         rowNumber={rowNumber}
                                         word={word.word}
                                         word_meaning={word.word_meaning}
@@ -57,6 +72,7 @@ class Wordlist extends Component {
                                         times_correct={word.times_correct}
                                         times_incorrect={word.times_incorrect}
                                         language={word.language_id}
+                                        delete={this.deleteWordHandler}
                                     />
                                 );
                             })}

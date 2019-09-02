@@ -2,12 +2,9 @@ import axios from 'axios';
 import { GET_ERRORS, SET_WORDLIST } from './types';
 
 export const getWordlist = () => dispatch => {
-    console.log('happens');
     axios
         .get('/words/all_words')
         .then(res => {
-            console.log(res.data);
-
             dispatch(setWordlist(res.data));
         })
         .catch(err => {
