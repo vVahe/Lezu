@@ -45,9 +45,7 @@ router.post(
             .then(([word, created]) => {
                 // if word already existed send error
                 if (!created) {
-                    errors.word = `The word: ${
-                        new_word.word
-                    } already exists in your selected language`;
+                    errors.word = `The word: ${new_word.word} already exists in your selected language`;
                     return res.status(400).json(errors);
                 }
 
@@ -58,7 +56,7 @@ router.post(
                         word.addCategory(category);
                     });
                 });
-                return res.json('Word successfully added');
+                return res.json({ message: 'Word successfully added' });
             })
             .catch(err => {
                 console.log(err);
@@ -110,11 +108,11 @@ router.post(
             .then(result => {
                 if (result) {
                     return res.json({
-                        word_delete: 'Word succesfully deleted'
+                        message: 'Word succesfully deleted'
                     });
                 }
 
-                errors.delete_word = 'Word does not exist';
+                errors.add_word = 'Word does not exist';
                 return res.status(404).json(errors);
             })
             .catch(err => {
@@ -137,7 +135,7 @@ router.post(
             .then(result => {
                 if (result) {
                     return res.json({
-                        word_delete: 'All words deleted'
+                        message: 'All words deleted'
                     });
                 }
 
@@ -178,7 +176,7 @@ router.post(
                 if (result) {
                     console.log(result);
                     return res.json({
-                        word_delete: 'Word successfully updated'
+                        message: 'Word successfully updated'
                     });
                 }
 
@@ -221,7 +219,9 @@ router.post(
                                 }
                             );
                         });
-                        return res.json('Categories successfully added');
+                        return res.json({
+                            message: 'Categories successfully added'
+                        });
                     })
                     .catch(err => {
                         return res.status(400).json(err);
