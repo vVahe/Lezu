@@ -33,6 +33,8 @@ const port = 5000;
 const authRouter = require('./routes/auth');
 const wordsRouter = require('./routes/words');
 const profileRouter = require('./routes/profile');
+const categoryRouter = require('./routes/category');
+const languageRouter = require('./routes/language');
 
 /** Body parser middleware */
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -45,6 +47,8 @@ require('./util/passport')(passport);
 app.use('/auth', authRouter);
 app.use('/words', wordsRouter);
 app.use('/profile', profileRouter);
+app.use('/category', categoryRouter);
+app.use('/language', languageRouter);
 
 app.listen(port, () => {
     console.log(`express listening on port ${port}`);
