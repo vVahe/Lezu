@@ -1,4 +1,5 @@
 import React from 'react';
+import DeleteWord from './DeleteWord';
 
 function Word(props) {
     return (
@@ -18,14 +19,7 @@ function Word(props) {
                     <i className="fa fa-pencil"></i>
                 </button>
             </td>
-            <td>
-                <button
-                    onClick={() => props.delete(props.word_id)}
-                    className="btn btn-outline-danger btn-sm"
-                >
-                    <i className="fa fa-times"></i>
-                </button>
-            </td>
+            <DeleteWord delete={props.delete} word_id={props.word_id} />
         </tr>
     );
 }

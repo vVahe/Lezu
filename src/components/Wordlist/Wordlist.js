@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { getWordlist, deleteWord } from '../../store/actions/wordlistActions';
+import { Link } from 'react-router-dom';
 
 import Word from './Word';
 
@@ -22,7 +23,13 @@ class Wordlist extends Component {
             <div className="mt-5">
                 <h1>Word List</h1>
                 <div className="container mt-5">
-                    <table className="table table-striped">
+                    <Link
+                        to="/add-word"
+                        className="btn btn-lg btn-outline-success my-2 float-left"
+                    >
+                        <i className="fa fa-plus mr-2"></i> Add Word
+                    </Link>
+                    <table className="table table-striped shadow-lg">
                         <thead className="thead-dark">
                             <tr>
                                 <th scope="col">#</th>

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { GET_ERRORS, SET_WORDLIST, SET_WORDLIST_MESSAGE } from './types';
+import { GET_ERRORS, SET_WORDLIST } from './types';
 
 export const getWordlist = () => dispatch => {
     axios
@@ -19,19 +19,11 @@ export const setWordlist = words => {
     };
 };
 
-export const setMessage = message => {
-    return {
-        type: SET_WORDLIST_MESSAGE,
-        payload: message
-    };
-};
-
 export const deleteWord = word_id => dispatch => {
     axios
         .post('/words/delete_word/' + word_id)
         .then(res => {
-            dispatch(getWordlist());
-            dispatch(setMessage());
+            dispatch(getWordlist(true));
         })
         .catch(err => {
             dispatch({ type: GET_ERRORS, payload: err.response.data });
