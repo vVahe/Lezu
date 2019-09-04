@@ -21,9 +21,17 @@ router.get('/search/:value', (req, res, next) => {
             category_name: {
                 [Op.like]: `%${req.params.value}%`
             }
-        }
+        },
+        limit: 50
     })
-        .then(categories => {
+        .then(cats => {
+            const categories = cats.map(category => {
+                return {
+                    value: category.category_id,
+                    label: category.category_name
+                };
+            });
+
             res.json({ categories });
         })
         .catch(err => {
