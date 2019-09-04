@@ -23,7 +23,10 @@ router.get('/search/:value', (req, res, next) => {
             }
         }
     })
-        .then(languages => {
+        .then(langs => {
+            const languages = langs.map(lang => {
+                return { value: lang.language_id, label: lang.language_name };
+            });
             res.json({ languages });
         })
         .catch(err => {
