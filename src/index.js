@@ -17,11 +17,13 @@ import './index.css';
 import authReducer from './store/reducers/authReducer';
 import wordlistReducer from './store/reducers/wordlistReducer';
 import errorsReducer from './store/reducers/errorReducer';
+import categoryReducer from './store/reducers/categoryReducer';
 
 // combine reducer to root reducer
 const rootReducer = combineReducers({
     auth: authReducer,
     wordlist: wordlistReducer,
+    category: categoryReducer,
     errors: errorsReducer
 });
 
