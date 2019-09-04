@@ -43,3 +43,7 @@
 .register-form {
     width: 50%;
 }
+
+.table > tbody > tr > td {
+    vertical-align: middle;
+}

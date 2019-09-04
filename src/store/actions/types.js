@@ -2,3 +2,6 @@
 
 export const GET_ERRORS = 'GET_ERRORS';
 export const SET_LOGGED_IN_USER = 'SET_LOGGED_IN_USER';
+
+export const SET_WORDLIST = 'SET_WORDLIST';
+export const SET_WORDLIST_MESSAGE = 'SET_WORDLIST_MESSAGE';

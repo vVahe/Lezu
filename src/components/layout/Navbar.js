@@ -21,11 +21,6 @@ class Navbar extends Component {
                         </NavLink>
                     </li>
                     <li className="nav-item">
-                        <NavLink to="/profile" className="nav-link">
-                            Profile
-                        </NavLink>
-                    </li>
-                    <li className="nav-item">
                         <NavLink to="word-list" className="nav-link">
                             Word List
                         </NavLink>
@@ -34,6 +29,11 @@ class Navbar extends Component {
                     <li className="nav-item">
                         <NavLink to="training" className="nav-link">
                             Train
+                        </NavLink>
+                    </li>
+                    <li className="nav-item">
+                        <NavLink to="/profile" className="nav-link">
+                            Profile
                         </NavLink>
                     </li>
                 </ul>

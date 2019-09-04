@@ -58,7 +58,7 @@ class Login extends Component {
                 <div className="card-header">
                     <h3>Login</h3>
                 </div>
-                <div class="card-body">
+                <div className="card-body">
                     <p className="lead">Login to your Word-Trainer account</p>
                     <form className="my-4" noValidate onSubmit={this.onSubmit}>
                         <div className="col-auto my-4">
