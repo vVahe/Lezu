@@ -23,7 +23,36 @@ export const deleteWord = word_id => dispatch => {
     axios
         .post('/words/delete_word/' + word_id)
         .then(res => {
-            dispatch(getWordlist(true));
+            dispatch(getWordlist());
+        })
+        .catch(err => {
+            dispatch({ type: GET_ERRORS, payload: err.response.data });
+        });
+};
+
+export const addWord = (word, history) => dispatch => {
+    // store category ids in array
+    let idsArr;
+    if (word.categories) {
+        idsArr = word.categories.map(cat => {
+            return cat.value;
+        });
+    }
+
+    const newWord = {
+        word: word.word.toLowerCase().trim(),
+        word_meaning: word.word_meaning.toLowerCase().trim(),
+        language_id: word.language ? word.language.value : '',
+        categories: idsArr ? idsArr.join(',') : ''
+    };
+
+    console.log(newWord);
+
+    axios
+        .post('/words/add_word', newWord)
+        .then(res => {
+            dispatch(getWordlist());
+            history.push('/word-list');
         })
         .catch(err => {
             dispatch({ type: GET_ERRORS, payload: err.response.data });

@@ -84,8 +84,8 @@ class Navbar extends Component {
         );
 
         return (
-            <nav className="navbar navbar-expand-lg navbar-light bg-light">
-                <nav className="navbar navbar-light bg-light">
+            <nav className="navbar navbar-expand-lg navbar-light bg-transparent">
+                <nav className="navbar navbar-light">
                     <Link to="/" className="navbar-brand">
                         <i className="fa fa-spinner fa-spin px-2" />
                         Word-Trainer
