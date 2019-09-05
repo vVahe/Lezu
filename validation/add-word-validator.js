@@ -9,7 +9,7 @@ module.exports = validate = input => {
     const errors = {};
     let passed = true;
 
-    const { word, word_meaning, language_id } = input;
+    const { word, word_meaning, language_id, categories } = input;
 
     // check if word length is less than 24 characters
     if (!validator.isLength(word.trim(), { max: 24 })) {
@@ -31,6 +31,10 @@ module.exports = validate = input => {
     // check if language is selected
     if (validator.isEmpty(language_id + ''))
         errors.language = 'Select a language';
+
+    // check if language is selected
+    if (validator.isEmpty(categories + ''))
+        errors.category = 'Select one or more categories';
 
     // check if any errors were found while validating
     if (Object.keys(errors).length > 0) {
