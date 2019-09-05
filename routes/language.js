@@ -34,4 +34,23 @@ router.get('/search/:value', (req, res, next) => {
         });
 });
 
+/**
+ * @route   GET /language/all_languages
+ * @desc    Get all languages
+ * @access  Public
+ * Returns all supported languages
+ */
+router.get('/all_languages', (req, res, next) => {
+    Language.findAll()
+        .then(langs => {
+            const languages = langs.map(lang => {
+                return { value: lang.language_id, label: lang.language_name };
+            });
+            res.json({ languages });
+        })
+        .catch(err => {
+            res.status(400).json(err);
+        });
+});
+
 module.exports = router;

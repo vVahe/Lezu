@@ -39,4 +39,29 @@ router.get('/search/:value', (req, res, next) => {
         });
 });
 
+/**
+ * @route   GET /category/all_categories
+ * @desc    Get all categories
+ * @access  Public
+ * Returns all supported categories
+ */
+router.get('/all_categories', (req, res, next) => {
+    errors = {};
+
+    Category.findAll()
+        .then(cats => {
+            const categories = cats.map(category => {
+                return {
+                    value: category.category_id,
+                    label: category.category_name
+                };
+            });
+
+            res.json({ categories });
+        })
+        .catch(err => {
+            res.status(400).json(err);
+        });
+});
+
 module.exports = router;
