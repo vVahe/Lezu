@@ -19,7 +19,7 @@ export default function WordInput(props) {
                 onChange={props.onChange}
             />
             {props.errors.word && (
-                <div className="invalid-feeback float-left text-danger mb-2 mt-1">
+                <div className="invalid-feeback float-left text-danger mb-2 mt-1 ml-2">
                     {props.errors.word}
                 </div>
             )}

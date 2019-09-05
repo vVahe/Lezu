@@ -16,7 +16,7 @@ export default function CategoryInput(props) {
                 isMulti
             />
             {props.errors.category && (
-                <div className="invalid-feeback float-left text-danger mb-2 mt-1">
+                <div className="invalid-feeback float-left text-danger mb-2 mt-1 ml-2">
                     {props.errors.category}
                 </div>
             )}

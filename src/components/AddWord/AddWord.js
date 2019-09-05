@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { addWord } from '../../store/actions/wordlistActions';
 import { getCategories } from '../../store/actions/categoryActions';
@@ -95,8 +96,14 @@ class AddWord extends Component {
                             />
                         </div>
 
+                        <Link
+                            to="/word-list"
+                            className="btn btn-outline-primary w-25  mt-5 mx-2"
+                        >
+                            Back to word list
+                        </Link>
                         <button
-                            className="btn btn-outline-primary btn-block w-50 mx-auto mt-5"
+                            className="btn btn-outline-success w-50  mt-5 mx-2"
                             type="submit"
                         >
                             Add Word
