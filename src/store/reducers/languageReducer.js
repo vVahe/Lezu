@@ -1,14 +1,14 @@
-import { SEARCH_CATEGORY } from '../actions/types';
+import { SEARCH_LANGUAGE } from '../actions/types';
 
 const initialState = {
-    categories: [],
+    languages: [],
     loading: false
 };
 
 export default function(state = initialState, action) {
     switch (action.type) {
-        case SEARCH_CATEGORY:
-            return { ...state, categories: action.payload };
+        case SEARCH_LANGUAGE:
+            return { ...state, languages: action.payload };
         default:
             return state;
     }

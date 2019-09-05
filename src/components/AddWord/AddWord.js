@@ -1,14 +1,37 @@
 import React, { Component } from 'react';
-import classnames from 'classnames';
+import { connect } from 'react-redux';
+import { searchCategory } from '../../store/actions/categoryActions';
+import { searchLanguage } from '../../store/actions/languageActions';
+import isEmpty from '../../utils/isEmpty';
+
 import CategoryInput from './CategoryInput';
+import LanguageInput from './LanguageInput';
+import WordInput from './WordInput';
+import WordMeaningInput from './WordMeaningInput';
 
 class AddWord extends Component {
     state = {
         word: '',
         word_meaning: '',
-        language_id: '',
+        language_id: null,
         categories: [],
         errors: {}
+    };
+
+    componentDidUpdate(prevProps) {
+        if (
+            JSON.stringify(this.props.errors) !==
+            JSON.stringify(prevProps.errors)
+        ) {
+            this.setState({
+                errors: this.props.errors
+            });
+        }
+    }
+
+    onSubmit = e => {
+        e.preventDefault();
+        console.log(this.state);
     };
 
     onChange = e => {
@@ -17,8 +40,35 @@ class AddWord extends Component {
         });
     };
 
+    categoryChangeHandler = input => {
+        const inputToLowerCase = input.toLowerCase();
+        this.setState({ categories: inputToLowerCase });
+        return inputToLowerCase;
+    };
+
+    loadCategories = async input => {
+        this.props.searchCategory(input);
+        if (!isEmpty(input)) {
+            await this.props.searchCategory(input);
+            return this.props.category.categories;
+        }
+    };
+
+    languageChangeHandler = input => {
+        const inputToLowerCase = input.toLowerCase();
+        this.setState({ language: inputToLowerCase });
+        return inputToLowerCase;
+    };
+
+    loadLanguages = async input => {
+        if (!isEmpty(input)) {
+            await this.props.searchLanguage(input);
+            return this.props.language.languages;
+        }
+    };
+
     render() {
-        const errors = {};
+        const { errors } = this.state;
 
         return (
             <div className="card add-word-form mx-auto my-5 shadow-lg">
@@ -27,59 +77,37 @@ class AddWord extends Component {
                 </div>
                 <div className="card-body">
                     <p className="lead">Add a new word to your word list</p>
-                    <form noValidate onSubmit={this.onSubmit}>
+                    <form className="mx-5" noValidate onSubmit={this.onSubmit}>
                         <div className="form-row">
-                            <div className="col my-4 form-group">
-                                <label
-                                    htmlFor="word"
-                                    className="float-left ml-2"
-                                >
-                                    Word
-                                </label>
-                                <input
-                                    name="word"
-                                    type="text"
-                                    className={classnames('form-control', {
-                                        'is-invalid': errors.word
-                                    })}
-                                    id="word"
-                                    placeholder="Type the word you want to add"
-                                    value={this.state.word}
-                                    onChange={this.onChange}
-                                />
-                                {errors.word && (
-                                    <div className="invalid-feeback float-left text-danger mb-2 mt-1">
-                                        {errors.word}
-                                    </div>
-                                )}
-                            </div>
-
-                            <div className="col my-4 form-group">
-                                <label
-                                    htmlFor="word_meaning"
-                                    className="float-left ml-2"
-                                >
-                                    Word Meaning
-                                </label>
-                                <input
-                                    name="word_meaning"
-                                    type="text"
-                                    className={classnames('form-control', {
-                                        'is-invalid': errors.word_meaning
-                                    })}
-                                    id="word"
-                                    placeholder="Type the meaning of the word"
-                                    value={this.state.word}
-                                    onChange={this.onChange}
-                                />
-                                {errors.word_meaning && (
-                                    <div className="invalid-feeback float-left text-danger mb-2 mt-1">
-                                        {errors.word_meaning}
-                                    </div>
-                                )}
-                            </div>
+                            <WordInput
+                                errors={errors}
+                                onChange={this.onChange}
+                                word={this.state.word}
+                            />
+                            <WordMeaningInput
+                                errors={errors}
+                                onChange={this.onChange}
+                                word={this.state.word_meaning}
+                            />
                         </div>
-                        <CategoryInput />
+                        <div className="form-row">
+                            <CategoryInput
+                                loadCategories={this.loadCategories}
+                                errors={errors}
+                                categoryChangeHandler={
+                                    this.categoryChangeHandler
+                                }
+                                categories={this.state.categories}
+                            />
+                            <LanguageInput
+                                loadLanguages={this.loadLanguages}
+                                errors={errors}
+                                languageChangeHandler={
+                                    this.languageChangeHandler
+                                }
+                                languages={this.state.language}
+                            />
+                        </div>
 
                         <button
                             className="btn btn-outline-primary btn-block w-50 mx-auto mt-5"
@@ -94,4 +122,14 @@ class AddWord extends Component {
     }
 }
 
-export default AddWord;
+const mapStateToProps = state => ({
+    auth: state.auth,
+    category: state.category,
+    language: state.language,
+    errors: state.errors
+});
+
+export default connect(
+    mapStateToProps,
+    { searchCategory, searchLanguage }
+)(AddWord);

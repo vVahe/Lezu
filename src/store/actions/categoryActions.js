@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { SEARCH_CATEGORY, EMPTY_CATEGORY } from './types';
+import { SEARCH_CATEGORY } from './types';
 
 export const searchCategory = input => async dispatch => {
     await axios
@@ -8,8 +8,4 @@ export const searchCategory = input => async dispatch => {
             dispatch({ type: SEARCH_CATEGORY, payload: res.data.categories })
         )
         .catch(err => console.log(err));
-};
-
-export const emptyCategories = () => {
-    return { type: EMPTY_CATEGORY };
 };
