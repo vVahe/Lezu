@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { addWord } from '../../store/actions/wordlistActions';
 import { getCategories } from '../../store/actions/categoryActions';
 import { getLanguages } from '../../store/actions/languageActions';
 
@@ -35,7 +36,7 @@ class AddWord extends Component {
 
     onSubmit = e => {
         e.preventDefault();
-        console.log(this.state);
+        this.props.addWord(this.state, this.props.history);
     };
 
     onChange = e => {
@@ -116,5 +117,5 @@ const mapStateToProps = state => ({
 
 export default connect(
     mapStateToProps,
-    { getCategories, getLanguages }
+    { getCategories, getLanguages, addWord }
 )(AddWord);
