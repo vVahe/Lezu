@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { searchCategory } from '../../store/actions/categoryActions';
-import { searchLanguage } from '../../store/actions/languageActions';
-import isEmpty from '../../utils/isEmpty';
+import { getCategories } from '../../store/actions/categoryActions';
+import { getLanguages } from '../../store/actions/languageActions';
 
 import CategoryInput from './CategoryInput';
 import LanguageInput from './LanguageInput';
@@ -13,10 +12,15 @@ class AddWord extends Component {
     state = {
         word: '',
         word_meaning: '',
-        language_id: null,
-        categories: [],
+        language: null,
+        categories: null,
         errors: {}
     };
+
+    componentDidMount() {
+        this.props.getCategories();
+        this.props.getLanguages();
+    }
 
     componentDidUpdate(prevProps) {
         if (
@@ -41,30 +45,11 @@ class AddWord extends Component {
     };
 
     categoryChangeHandler = input => {
-        const inputToLowerCase = input.toLowerCase();
-        this.setState({ categories: inputToLowerCase });
-        return inputToLowerCase;
-    };
-
-    loadCategories = async input => {
-        this.props.searchCategory(input);
-        if (!isEmpty(input)) {
-            await this.props.searchCategory(input);
-            return this.props.category.categories;
-        }
+        this.setState({ categories: input });
     };
 
     languageChangeHandler = input => {
-        const inputToLowerCase = input.toLowerCase();
-        this.setState({ language: inputToLowerCase });
-        return inputToLowerCase;
-    };
-
-    loadLanguages = async input => {
-        if (!isEmpty(input)) {
-            await this.props.searchLanguage(input);
-            return this.props.language.languages;
-        }
+        this.setState({ language: input });
     };
 
     render() {
@@ -92,20 +77,20 @@ class AddWord extends Component {
                         </div>
                         <div className="form-row">
                             <CategoryInput
-                                loadCategories={this.loadCategories}
                                 errors={errors}
+                                categoryOptions={this.props.category.categories}
                                 categoryChangeHandler={
                                     this.categoryChangeHandler
                                 }
                                 categories={this.state.categories}
                             />
                             <LanguageInput
-                                loadLanguages={this.loadLanguages}
                                 errors={errors}
+                                languageOptions={this.props.language.languages}
                                 languageChangeHandler={
                                     this.languageChangeHandler
                                 }
-                                languages={this.state.language}
+                                language={this.state.language}
                             />
                         </div>
 
@@ -131,5 +116,5 @@ const mapStateToProps = state => ({
 
 export default connect(
     mapStateToProps,
-    { searchCategory, searchLanguage }
+    { getCategories, getLanguages }
 )(AddWord);

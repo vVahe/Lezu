@@ -1,4 +1,4 @@
-import { SEARCH_CATEGORY } from '../actions/types';
+import { GET_CATEGORY } from '../actions/types';
 
 const initialState = {
     categories: [],
@@ -7,7 +7,7 @@ const initialState = {
 
 export default function(state = initialState, action) {
     switch (action.type) {
-        case SEARCH_CATEGORY:
+        case GET_CATEGORY:
             return { ...state, categories: action.payload };
         default:
             return state;

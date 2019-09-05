@@ -1,5 +1,5 @@
 import React from 'react';
-import AsyncSelect from 'react-select/async';
+import Select from 'react-select';
 
 export default function LanguageInput(props) {
     return (
@@ -7,12 +7,12 @@ export default function LanguageInput(props) {
             <label>
                 <h5>Language</h5>
             </label>
-            <AsyncSelect
-                className="form-control-lg"
-                cacheOptions
-                loadOptions={e => props.loadLanguages(e)}
-                onInputChange={e => props.languageChangeHandler(e)}
+            <Select
+                value={props.language}
+                options={props.languageOptions}
+                onChange={e => props.languageChangeHandler(e)}
                 placeholder="Select language"
+                isSearchable={true}
             />
             {props.errors.language && (
                 <div className="invalid-feeback float-left text-danger mb-2 mt-1">

@@ -1,11 +1,11 @@
 import axios from 'axios';
-import { SEARCH_LANGUAGE } from './types';
+import { GET_LANGUAGE } from './types';
 
-export const searchLanguage = input => async dispatch => {
-    await axios
-        .get('/language/search/' + input)
+export const getLanguages = () => dispatch => {
+    axios
+        .get('/language/all_languages')
         .then(res =>
-            dispatch({ type: SEARCH_LANGUAGE, payload: res.data.languages })
+            dispatch({ type: GET_LANGUAGE, payload: res.data.languages })
         )
         .catch(err => console.log(err));
 };

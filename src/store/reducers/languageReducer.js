@@ -1,4 +1,4 @@
-import { SEARCH_LANGUAGE } from '../actions/types';
+import { GET_LANGUAGE } from '../actions/types';
 
 const initialState = {
     languages: [],
@@ -7,7 +7,7 @@ const initialState = {
 
 export default function(state = initialState, action) {
     switch (action.type) {
-        case SEARCH_LANGUAGE:
+        case GET_LANGUAGE:
             return { ...state, languages: action.payload };
         default:
             return state;

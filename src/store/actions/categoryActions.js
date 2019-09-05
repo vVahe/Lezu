@@ -1,11 +1,11 @@
 import axios from 'axios';
-import { SEARCH_CATEGORY } from './types';
+import { GET_CATEGORY } from './types';
 
-export const searchCategory = input => async dispatch => {
-    await axios
-        .get('/category/search/' + input)
+export const getCategories = () => dispatch => {
+    axios
+        .get('/category/all_categories')
         .then(res =>
-            dispatch({ type: SEARCH_CATEGORY, payload: res.data.categories })
+            dispatch({ type: GET_CATEGORY, payload: res.data.categories })
         )
         .catch(err => console.log(err));
 };
