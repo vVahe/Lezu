@@ -66,11 +66,42 @@ router.get(
     }
 );
 
+/**
+ * @route   GET /words-retrieve/recently_added_words/:amount
+ * @desc    GET all recently added words
+ * @access  Private
+ */
+router.get(
+    '/recently_added_words/:amount',
+    passport.authenticate('jwt', { session: false }),
+    (req, res, next) => {
+        const errors = {};
+
+        sequelize
+            .query(
+                'SELECT * FROM words ORDER BY created_at DESC LIMIT :amount ',
+                {
+                    replacements: { amount: Number(req.params.amount) },
+                    type: sequelize.QueryTypes.SELECT
+                }
+            )
+            .then(words => {
+                return res.json(words);
+            })
+            .catch(err => {
+                return res.status(400).json(err);
+            });
+    }
+);
+
 // return recently created words (1 day, 1 week, 1 month ago)
 // return difficult words
 // return words by categories
 // return words by language
-// return untrained words
 // return words last reviewed wrong (needs schema update)
 
 module.exports = router;
+
+/*
+    SELECT * FROM words ORDER BY created_at DESC LIMIT 10
+*/
