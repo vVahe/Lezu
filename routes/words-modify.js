@@ -10,7 +10,7 @@ const Word = require('../models/Word');
 const Category = require('../models/Category');
 
 /**
- * @route   POST /words/add_word
+ * @route   POST /words-modify/add_word
  * @desc    Add word
  * @access  Private
  */
@@ -66,36 +66,7 @@ router.post(
 );
 
 /**
- * @route   GET /words/all_words
- * @desc    GET all words of the logged in user
- * @access  Private
- */
-router.get(
-    '/all_words',
-    passport.authenticate('jwt', { session: false }),
-    (req, res, next) => {
-        const errors = {};
-
-        // find all words
-        Word.findAll({ where: { user_id: req.user.user_id } })
-            .then(words => {
-                // if no words were found return error
-                if (Object.keys(words).length === 0) {
-                    errors.words = 'no words found';
-                    return res.status(400).json(errors);
-                }
-
-                // else return found words
-                return res.json(words);
-            })
-            .catch(err => {
-                return res.status(400).json(err);
-            });
-    }
-);
-
-/**
- * @route   POST /words/delete_word/:word_id
+ * @route   POST /words-modify/delete_word/:word_id
  * @desc    Delete a word
  * @access  Private
  */
@@ -122,7 +93,7 @@ router.post(
 );
 
 /**
- * @route   POST /words/delete_all
+ * @route   POST /words-modify/delete_all
  * @desc    Delete all words
  * @access  Private
  */
@@ -149,7 +120,7 @@ router.post(
 );
 
 /**
- * @route   POST /words/update_word/:word_id
+ * @route   POST /words-modify/update_word/:word_id
  * @desc    Update a word
  * @access  Private
  */
@@ -190,7 +161,7 @@ router.post(
 );
 
 /**
- * @route   POST /words/update_word_categories/:word_id
+ * @route   POST /words-modify/update_word_categories/:word_id
  * @desc    Update a word categories
  * @access  Private
  * FIXME: could be optimized maybe?
@@ -231,6 +202,45 @@ router.post(
                 return res.status(400).json(err);
             });
         // add all categories
+    }
+);
+
+/**
+ * @route   PUT /words-modify/update_word_reviewing/:word_id/:result
+ * @desc    Update reviewing stats of a word
+ * @access  Private
+ * Update the times_reviewed, times_correct, times_incorrect properties of a word
+ * if the incoming request has a paramater of result=correct then times_reviewed and
+ * times_correct is updated, if result=incorrect then times_reviewed and times_incorrect
+ * is updated
+ */
+router.put(
+    '/update_word_reviewing/:word_id/:result',
+    passport.authenticate('jwt', { session: false }),
+    (req, res, next) => {
+        let incrementCorrect = 1;
+        let incrementIncorrect = 0;
+
+        if (req.params.result === 'incorrect') {
+            incrementCorrect = 0;
+            incrementIncorrect = 1;
+        }
+
+        Word.findByPk(req.params.word_id)
+            .then(word => {
+                return word
+                    .increment({
+                        times_reviewed: 1,
+                        times_correct: incrementCorrect,
+                        times_incorrect: incrementIncorrect
+                    })
+                    .then(result => {
+                        return res.json({ message: 'ok' });
+                    });
+            })
+            .catch(err => {
+                return res.status(400).json(err);
+            });
     }
 );
 

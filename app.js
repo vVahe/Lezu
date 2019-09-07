@@ -31,10 +31,12 @@ const port = process.env.PORT || 5000;
 
 /** routers */
 const authRouter = require('./routes/auth');
-const wordsRouter = require('./routes/words');
+
 const profileRouter = require('./routes/profile');
 const categoryRouter = require('./routes/category');
 const languageRouter = require('./routes/language');
+const wordsModifyRouter = require('./routes/words-modify');
+const wordsRetrieveRouter = require('./routes/word-retrieve');
 
 /** Body parser middleware */
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -45,10 +47,11 @@ app.use(passport.initialize());
 require('./config/passport')(passport);
 
 app.use('/auth', authRouter);
-app.use('/words', wordsRouter);
 app.use('/profile', profileRouter);
 app.use('/category', categoryRouter);
 app.use('/language', languageRouter);
+app.use('/words-modify', wordsModifyRouter);
+app.use('/words-retrieve', wordsRetrieveRouter);
 
 app.listen(port, () => {
     console.log(`express listening on port ${port}`);
