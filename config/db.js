@@ -1,7 +1,9 @@
+const mysqlURI = require('./keys').mysqlURI;
+
 const Sequelize = require('sequelize');
 
 const sequelize = new Sequelize('word_trainer', 'root', 'iowe8923', {
-    host: 'localhost',
+    host: mysqlURI,
     dialect: 'mysql',
     logging: false,
     pool: {
