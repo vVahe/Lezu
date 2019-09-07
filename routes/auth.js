@@ -7,7 +7,7 @@ const passport = require('passport');
 const registerValidator = require('../validation/register-validator');
 const loginValidator = require('../validation/login-validator');
 
-const keys = require('../util/keys');
+const keys = require('../config/keys');
 const router = express.Router();
 
 /** Load User model */

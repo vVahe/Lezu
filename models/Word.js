@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-const sequelize = require('../util/db');
+const sequelize = require('../config/db');
 
 /**
  * The following model defines the word schema

@@ -1,7 +1,7 @@
 const express = require('express');
 const passport = require('passport');
 const router = express.Router();
-const sequelize = require('../util/db');
+const sequelize = require('../config/db');
 
 /**
  * @route   POST /words/update_word_reviewing/:word_id

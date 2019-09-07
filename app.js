@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const passport = require('passport');
 
-const sequelize = require('./util/db');
+const sequelize = require('./config/db');
 
 // import models
 const User = require('./models/User');
@@ -42,7 +42,7 @@ app.use(bodyParser.json());
 
 /** Passport middleware & config */
 app.use(passport.initialize());
-require('./util/passport')(passport);
+require('./config/passport')(passport);
 
 app.use('/auth', authRouter);
 app.use('/words', wordsRouter);
