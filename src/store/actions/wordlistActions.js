@@ -3,7 +3,7 @@ import { GET_ERRORS, SET_WORDLIST } from './types';
 
 export const getWordlist = () => dispatch => {
     axios
-        .get('/words/all_words')
+        .get('/words-retrieve/all_words')
         .then(res => {
             dispatch(setWordlist(res.data));
         })
@@ -21,7 +21,7 @@ export const setWordlist = words => {
 
 export const deleteWord = word_id => dispatch => {
     axios
-        .post('/words/delete_word/' + word_id)
+        .post('/words-modify/delete_word/' + word_id)
         .then(res => {
             dispatch(getWordlist());
         })
@@ -49,7 +49,7 @@ export const addWord = (word, history) => dispatch => {
     console.log(newWord);
 
     axios
-        .post('/words/add_word', newWord)
+        .post('/words-modify/add_word', newWord)
         .then(res => {
             dispatch(getWordlist());
             history.push('/word-list');
