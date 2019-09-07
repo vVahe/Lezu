@@ -8,12 +8,12 @@ import './App.css';
 
 import Navbar from './components/layout/Navbar';
 import Landing from './components/layout/Landing';
-import Footer from './components/layout/Footer';
+// import Footer from './components/layout/Footer';
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
 import Dashboard from './components/dashboard/Dashboard';
-import Wordlist from './components/Wordlist/Wordlist';
-import AddWord from './components/AddWord/AddWord';
+import Wordlist from './components/wordlist/Wordlist';
+import AddWord from './components/addWord/AddWord';
 
 // set auth token before any component renders
 if (localStorage.getItem('jwtToken')) {

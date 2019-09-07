@@ -29,7 +29,7 @@ class Wordlist extends Component {
                     >
                         <i className="fa fa-plus mr-2"></i> Add Word
                     </Link>
-                    <table className="table table-striped shadow-lg">
+                    <table className="table table-striped shadow-lg bg-white">
                         <thead className="thead-dark">
                             <tr>
                                 <th scope="col">#</th>

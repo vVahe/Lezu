@@ -27,8 +27,8 @@ class Navbar extends Component {
                     </li>
 
                     <li className="nav-item">
-                        <NavLink to="training" className="nav-link">
-                            Train
+                        <NavLink to="reviewing" className="nav-link">
+                            Review
                         </NavLink>
                     </li>
                     <li className="nav-item">
