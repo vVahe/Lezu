@@ -48,3 +48,7 @@
 .table > tbody > tr > td {
     vertical-align: middle;
 }
+
+.review-border {
+    border-width: thick;
+}
