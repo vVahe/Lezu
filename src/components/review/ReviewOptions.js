@@ -18,6 +18,13 @@ export default function ReviewOptions(props) {
             >
                 Recently added
             </button>
+            <button
+                onClick={e => props.retrieveWords(e)}
+                className="btn btn-outline-primary btn-large mx-1"
+                value="words-retrieve/all_words"
+            >
+                All words
+            </button>
         </div>
     );
 }

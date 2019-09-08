@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
-import classnames from 'classnames';
 import { connect } from 'react-redux';
 import {
     getToReviewWords,
     updateWordInReview,
     setWordReview,
-    removeToReviewWords
+    removeToReviewWords,
+    showResults
 } from '../../store/actions/wordReviewActions';
 
 import ReviewOptions from './ReviewOptions';
 import ReviewCard from './ReviewCard';
+import ReviewResult from './ReviewResult';
 
 class Review extends Component {
     state = {
@@ -21,11 +22,6 @@ class Review extends Component {
         this.setState({
             word_meaning: e.target.value
         });
-    };
-
-    // retrieves the list of words
-    retrieveWords = e => {
-        this.props.getToReviewWords(e.target.value);
     };
 
     // reviews for for correctness
@@ -49,24 +45,48 @@ class Review extends Component {
     };
 
     render() {
-        const { words, counter, loaded, result } = this.props.wordReview;
+        const { words, counter, loaded, result, done } = this.props.wordReview;
 
         return (
             <div className="container my-5">
                 <h3>Review Words</h3>
-                {!loaded && <p className="lead">
-                    Choose which words to review by using the options below
-                </p>}
-
                 {!loaded && (
-                    <ReviewOptions retrieveWords={this.retrieveWords} />
+                    <p className="lead">
+                        Choose which words to review by using the options below
+                    </p>
                 )}
 
-                {loaded && 
-                    <ReviewCard counter={counter} words={words} result={result} loaded={loaded} reviewWord={this.reviewWord} nextWord={this.nextWord} changeHandler={this.onChange} word_meaning={this.state.word_meaning} /> 
-                }
+                {!loaded && (
+                    <ReviewOptions
+                        retrieveWords={e =>
+                            this.props.getToReviewWords(e.target.value)
+                        }
+                    />
+                )}
 
+                {loaded && !done && (
+                    <ReviewCard
+                        counter={counter}
+                        words={words}
+                        result={result}
+                        loaded={loaded}
+                        reviewWord={this.reviewWord}
+                        nextWord={this.nextWord}
+                        changeHandler={this.onChange}
+                        word_meaning={this.state.word_meaning}
+                        showResults={this.props.showResults}
+                    />
+                )}
 
+                {done && <ReviewResult words={words} />}
+                {done && (
+                    <button
+                        onClick={this.props.removeToReviewWords}
+                        className="btn btn-primary btn-lg mt-3"
+                    >
+                        Finish Reviewing
+                    </button>
+                )}
             </div>
         );
     }
@@ -84,6 +104,7 @@ export default connect(
         getToReviewWords,
         updateWordInReview,
         setWordReview,
-        removeToReviewWords
+        removeToReviewWords,
+        showResults
     }
 )(Review);

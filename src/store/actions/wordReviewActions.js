@@ -5,7 +5,8 @@ import {
     SET_TO_REVIEW_WORDS,
     UPDATE_WORD_IN_REVIEW,
     WORD_CORRECT,
-    WORD_INCORRECT
+    WORD_INCORRECT,
+    SHOW_RESULTS
 } from './types';
 
 export const getToReviewWords = url => dispatch => {
@@ -64,5 +65,11 @@ export const wordCorrect = () => {
 export const wordInCorrect = () => {
     return {
         type: WORD_INCORRECT
+    };
+};
+
+export const showResults = () => {
+    return {
+        type: SHOW_RESULTS
     };
 };
