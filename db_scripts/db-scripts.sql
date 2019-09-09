@@ -1,3 +1,14 @@
+-- delete db if it exists
+DROP DATABASE IF EXISTS word_trainer;
+-- create db
+CREATE DATABASE word_trainer;
+-- select database
+USE word_trainer;
+
+-- create tables
+CREATE TABLE categories;
+CREATE TABLE languages;
+
 -- The following file populates the languages and categories tables with initial values
 
 INSERT INTO languages(language_id, language_name)
@@ -26,3 +37,6 @@ VALUES  (1, 'furniture'),
         (17, 'weather'),
         (18, 'countries' ),
         (19, 'proposition' );
+
+
+

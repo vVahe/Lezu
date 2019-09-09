@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const passport = require('passport');
-
+const cors = require('cors');
 const sequelize = require('./config/db');
 
 // import models
@@ -39,6 +39,7 @@ const wordsModifyRouter = require('./routes/words-modify');
 const wordsRetrieveRouter = require('./routes/word-retrieve');
 
 /** Body parser middleware */
+app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
@@ -57,4 +58,15 @@ app.listen(port, () => {
     console.log(`express listening on port ${port}`);
 });
 
+// automatically create tables based on models
 sequelize.sync({ force: false }).then();
+
+// check for db connection
+sequelize
+    .authenticate()
+    .then(() => {
+        console.log('Connection has been established successfully.');
+    })
+    .catch(err => {
+        console.error('Unable to connect to the database:', err);
+    });
