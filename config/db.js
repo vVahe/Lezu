@@ -1,10 +1,16 @@
-const mysqlURI = require('./keys').mysqlURI;
+const mysqlHost = require('./keys').mysqlHost;
+const mysqlUser = require('./keys').mysqlUser;
+const mysqlPassword = require('./keys').mysqlPassword;
+const mysqlDatebase = require('./keys').mysqlDatabase;
 
 const Sequelize = require('sequelize');
 
-const sequelize = new Sequelize('word_trainer', 'root', 'iowe8923', {
-    host: mysqlURI,
+const sequelize = new Sequelize(mysqlDatebase, mysqlUser, mysqlPassword, {
+    host: mysqlHost,
     dialect: 'mysql',
+    dialectOptions: {
+        insecureAuth: true
+    },
     logging: false,
     pool: {
         max: 10,
