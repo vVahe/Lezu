@@ -1,7 +1,7 @@
-<<<<<<< HEAD
 # Lezu
 
 Lezu is a service which allows users to create and train with their own vocabulairy lists to learn new words in mulitple languages.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
@@ -70,8 +70,3 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `npm run build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
-=======
-# word-trainer
-
-Service which helps learn new words in any language
->>>>>>> api/master
