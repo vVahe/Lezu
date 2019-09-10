@@ -4,4 +4,4 @@ Lezu is a service which allows users to create and train with their own vocabula
 
 ## Technologies & Platforms used
 
-![Technologies Used](https://i.postimg.cc/1tMBSd7B/Lezu-logos.png)
+![Technologies Used](https://i.postimg.cc/9fQhPDwQ/Lezu-logos.png)
