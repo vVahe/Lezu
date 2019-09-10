@@ -8,16 +8,16 @@ services:
             - MYSQL_ROOT_PASSWORD=password
             - MYSQL_DATABASE=word_trainer
         volumes:
-            - ./server/db_scripts/:/docker-entrypoint-initdb.d/
+            - ./api/db_scripts/:/docker-entrypoint-initdb.d/
 
     api:
         build:
             dockerfile: Dockerfile.dev
-            context: ./server
+            context: ./api
         restart: always
         volumes:
             - /app/node_modules # leave node modules folder as is
-            - ./server:/app # copy content from server folder to /app (WORKDIR)d
+            - ./api:/app # copy content from server folder to /app (WORKDIR)d
         depends_on:
             - db
         environment:
