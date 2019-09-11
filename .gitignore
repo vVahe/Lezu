@@ -6,7 +6,7 @@ api/config/keys_dev
 .pnp.js
 
 # testing
-/coverage
+client/coverage
 
 # production
 client/build

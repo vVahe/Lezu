@@ -10,7 +10,7 @@ before_install:
 
 script:
     # run test for lezu-client
-    - docker run vvahe/lezu-client-test npm run test -- --coverage
+    - docker run vvahe/lezu-client-test npm run ci-test -- --coverage
 
 after_success:
     # create production images
