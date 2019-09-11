@@ -8,7 +8,7 @@ before_install:
     # build docker container with dev config for lezu-client
     - docker build -t vvahe/lezu-client-test -f ./client/Dockerfile.dev ./client
 
-scripts:
+script:
     # run test for lezu-client
     - docker run vvahe/lezu-client-test npm run test -- --coverage
 
