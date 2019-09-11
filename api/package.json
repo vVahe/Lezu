@@ -9,14 +9,14 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/vVahe/word-trainer.git"
+        "url": "git+https://github.com/vVahe/Lezu.git"
     },
     "author": "vVahe",
     "license": "SEE LICENSE IN LICENSE FILE",
     "bugs": {
-        "url": "https://github.com/vVahe/word-trainer/issues"
+        "url": "https://github.com/vVahe/Lezu/issues"
     },
-    "homepage": "https://github.com/vVahe/word-trainer#readme",
+    "homepage": "https://github.com/vVahe/Lezu#readme",
     "devDependencies": {
         "nodemon": "^1.19.1"
     },

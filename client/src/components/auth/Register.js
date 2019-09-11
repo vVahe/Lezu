@@ -72,7 +72,7 @@ class Register extends Component {
                     <h3>Register</h3>
                 </div>
                 <div className="card-body">
-                    <p className="lead">Create your own Word-Trainer account</p>
+                    <p className="lead">Create your own Lezu account</p>
                     <form noValidate onSubmit={this.onSubmit}>
                         <div className="col-auto my-4">
                             <label className="sr-only" htmlFor="first_name">

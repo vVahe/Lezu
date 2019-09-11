@@ -6,7 +6,7 @@ services:
         image: 'mysql:5.7.27'
         environment:
             - MYSQL_ROOT_PASSWORD=password
-            - MYSQL_DATABASE=word_trainer
+            - MYSQL_DATABASE=lezu_db
         volumes:
             - ./api/db_scripts/:/docker-entrypoint-initdb.d/
 
@@ -25,7 +25,7 @@ services:
             - MYSQL_HOST=db
             - MYSQL_USER=root
             - MYSQL_PASSWORD=password
-            - MYSQL_DATABASE=word_trainer
+            - MYSQL_DATABASE=lezu_db
 
     client:
         build:

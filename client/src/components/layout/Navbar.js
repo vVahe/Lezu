@@ -88,7 +88,7 @@ class Navbar extends Component {
                 <nav className="navbar navbar-light">
                     <Link to="/" className="navbar-brand">
                         <i className="fa fa-spinner fa-spin px-2" />
-                        Word-Trainer
+                        Lezu
                     </Link>
                 </nav>
                 <button

@@ -1,9 +1,9 @@
 -- delete db if it exists
-DROP DATABASE IF EXISTS word_trainer;
+DROP DATABASE IF EXISTS lezu_db;
 -- create db
-CREATE DATABASE word_trainer;
+CREATE DATABASE lezu_db;
 -- select database
-USE word_trainer;
+USE lezu_db;
 
 -- create tables
 CREATE TABLE categories;
