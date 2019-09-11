@@ -19,7 +19,7 @@ services:
         restart: always
         volumes:
             - /app/node_modules # leave node modules folder as is
-            - ./api:/app # copy content from server folder to /app (WORKDIR)d
+            - ./api:/app # copy content from server folder to /app (WORKDIR)
         depends_on:
             - db
         environment:
@@ -36,8 +36,8 @@ services:
             context: ./client
         restart: always
         volumes:
-            - /app/node_modules
-            - ./client:/app
+            - /app/node_modules # leave node modules folder as is
+            - ./client:/app # copy content from server folder to /app (WORKDIR)
         depends_on:
             - db
             - api
@@ -49,4 +49,4 @@ services:
             dockerfile: Dockerfile.dev
             context: ./nginx
         ports:
-            - '4000:80'
+            - '4000:80' # map host port 4000 to nginx container port 80
