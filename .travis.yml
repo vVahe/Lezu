@@ -1,0 +1,21 @@
+sudo: required
+services:
+    - docker
+
+before_install:
+    - docker build -t vvahe/lezu-client-test -f ./client/Dockerfile.dev ./client
+
+scripts:
+    - docker run vvahe/lezu-client-test npm test -- --coverage
+
+after_success:
+    # create production images
+    - docker build -t vvahe/lezu_client ./client
+    - docker build -t vvahe/lezu_api ./api
+    - docker build -t vvahe/lezu_nginx ./nginx
+    # login to docker CLI
+    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+    # push images to docker hub
+    - docker push vvahe/lezu_client
+    - docker push vvahe/lezu_api
+    - docker push vvahe/lezu_nginx
