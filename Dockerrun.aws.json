@@ -5,20 +5,23 @@
             "name": "lezu_client",
             "image": "vvahe/lezu_client",
             "hostname": "client",
-            "essential": false
+            "essential": false,
+            "memory": 128
         },
         {
             "name": "lezu_api",
             "image": "vvahe/lezu_api",
             "hostname": "api",
-            "essential": false
+            "essential": false,
+            "memory": 128
         },
         {
             "name": "lezu_nginx",
             "image": "vvahe/lezu_nginx",
             "essential": true,
             "portMappings": [{ "hostPort": 80, "containerPort": 80 }],
-            "links": ["lezu_client", "lezu_api"]
+            "links": ["lezu_client", "lezu_api"],
+            "memory": 128
         }
     ]
 }
