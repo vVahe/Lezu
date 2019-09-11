@@ -23,3 +23,16 @@ after_success:
     - docker push vvahe/lezu_client
     - docker push vvahe/lezu_api
     - docker push vvahe/lezu_nginx
+
+deploy:
+    provider: elasticbeanstalk
+    region: eu-west-2
+    app: Lezu
+    env: Lezu-env
+    bucket_name: elasticbeanstalk-eu-west-2-322210610177
+    bucket_path: lezu
+    on:
+        branch: master
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key:
+        secure: '$AWS_SECRET_KEY'
