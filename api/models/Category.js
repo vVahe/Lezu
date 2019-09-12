@@ -2,9 +2,10 @@ const Sequelize = require('sequelize');
 const sequelize = require('../config/db');
 
 /**
- * The following model defines the user schema
+ * The following model defines the category schema
  * @category_id    : id of the category
- * @category_name  : category in text
+ * @category_name  : category name
+ * Words can have one or more categories related to them
  */
 const Category = sequelize.define(
     'categories',

@@ -1,14 +1,3 @@
--- delete db if it exists
-DROP DATABASE IF EXISTS lezu_db;
--- create db
-CREATE DATABASE lezu_db;
--- select database
-USE lezu_db;
-
--- create tables
-CREATE TABLE categories;
-CREATE TABLE languages;
-
 -- The following file populates the languages and categories tables with initial values
 
 INSERT INTO languages(language_id, language_name)

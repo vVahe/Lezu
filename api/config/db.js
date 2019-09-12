@@ -5,12 +5,10 @@ const mysqlDatebase = require('./keys').mysqlDatabase;
 
 const Sequelize = require('sequelize');
 
+// create connection to mysql database
 const sequelize = new Sequelize(mysqlDatebase, mysqlUser, mysqlPassword, {
     host: mysqlHost,
     dialect: 'mysql',
-    dialectOptions: {
-        insecureAuth: true
-    },
     logging: false,
     pool: {
         max: 10,

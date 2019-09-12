@@ -14,15 +14,15 @@ script:
 
 after_success:
     # create production images
-    - docker build -t vvahe/lezu_client ./client
-    - docker build -t vvahe/lezu_api ./api
-    - docker build -t vvahe/lezu_nginx ./nginx
+    - docker build -t vvahe/lezu-client ./client
+    - docker build -t vvahe/lezu-api ./api
+    - docker build -t vvahe/lezu-nginx ./nginx
     # login to docker CLI
     - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
     # push images to docker hub
-    - docker push vvahe/lezu_client
-    - docker push vvahe/lezu_api
-    - docker push vvahe/lezu_nginx
+    - docker push vvahe/lezu-client
+    - docker push vvahe/lezu-api
+    - docker push vvahe/lezu-nginx
 
 deploy:
     provider: elasticbeanstalk
