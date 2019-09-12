@@ -6,7 +6,7 @@ export default function ReviewOptions(props) {
             <button
                 onClick={e => props.retrieveWords(e)}
                 className="btn btn-outline-primary btn-large mx-1"
-                value="words-retrieve/unreviewed_words"
+                value="/words-retrieve/unreviewed_words"
             >
                 Unreviewed Words
             </button>
@@ -14,14 +14,14 @@ export default function ReviewOptions(props) {
             <button
                 onClick={e => props.retrieveWords(e)}
                 className="btn btn-outline-primary btn-large mx-1"
-                value="words-retrieve/recently_added_words/2"
+                value="/words-retrieve/recently_added_words/2"
             >
                 Recently added
             </button>
             <button
                 onClick={e => props.retrieveWords(e)}
                 className="btn btn-outline-primary btn-large mx-1"
-                value="words-retrieve/all_words"
+                value="/words-retrieve/all_words"
             >
                 All words
             </button>

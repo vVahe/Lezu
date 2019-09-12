@@ -6,7 +6,7 @@ import setAuthToken from '../../utils/setAuthToken';
 // Register user
 export const registerUser = (userData, history) => dispatch => {
     axios
-        .post('/auth/register', userData)
+        .post('/api/auth/register', userData)
         .then(res => history.push('/login'))
         .catch(err => {
             dispatch({
@@ -19,7 +19,7 @@ export const registerUser = (userData, history) => dispatch => {
 // Get JWToken for user
 export const loginUser = userData => dispatch => {
     axios
-        .post('/auth/login', userData)
+        .post('/api/auth/login', userData)
         .then(res => {
             // get token from response
             const { token } = res.data;

@@ -11,7 +11,7 @@ import {
 
 export const getToReviewWords = url => dispatch => {
     axios
-        .get(url)
+        .get('/api' + url)
         .then(res => {
             console.log(res);
             dispatch(setToReviewWords(res.data));
@@ -46,7 +46,7 @@ export const updateWordInReview = count => {
 
 export const setWordReview = (word_id, result) => dispatch => {
     axios
-        .put(`/words-modify/update_word_reviewing/${word_id}/${result}`)
+        .put(`/api/words-modify/update_word_reviewing/${word_id}/${result}`)
         .then(res => {
             if (result === 'correct') {
                 dispatch(wordCorrect());
