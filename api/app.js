@@ -27,7 +27,7 @@ Word.belongsToMany(Category, {
 });
 
 const app = express();
-const port = 5000;
+const port = process.env.PORT || 5000;
 
 /** routers */
 const authRouter = require('./routes/auth');
