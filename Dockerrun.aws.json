@@ -2,25 +2,25 @@
     "AWSEBDockerrunVersion": 2,
     "containerDefinitions": [
         {
-            "name": "lezu-client",
+            "name": "client",
             "image": "vvahe/lezu-client",
             "hostname": "client",
             "essential": false,
             "memory": 128
         },
         {
-            "name": "lezu-api",
+            "name": "api",
             "image": "vvahe/lezu-api",
             "hostname": "api",
             "essential": false,
             "memory": 128
         },
         {
-            "name": "lezu_nginx",
+            "name": "nginx",
             "image": "vvahe/lezu-nginx",
             "essential": true,
             "portMappings": [{ "hostPort": 80, "containerPort": 80 }],
-            "links": ["lezu-client", "lezu-api"],
+            "links": ["client", "api"],
             "memory": 128
         }
     ]
