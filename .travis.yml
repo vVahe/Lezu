@@ -27,8 +27,8 @@ after_success:
 deploy:
     provider: elasticbeanstalk
     region: eu-west-2
-    app: Lezu
-    env: Lezu-env
+    app: lezu
+    env: Lezu-env-default
     bucket_name: elasticbeanstalk-eu-west-2-322210610177
     bucket_path: lezu
     on:
