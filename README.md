@@ -2,7 +2,7 @@
 
 Lezu is a service which allows users to create and train with their own vocabulairy lists to learn new words in mulitple languages.
 
-Visit the deployed version of Lezu here <-- (coming soon)
+Visit the deployed version of [Lezu](http://lezu.eu-west-2.elasticbeanstalk.com)
 
 # How to run Lezu locally on your machine
 
