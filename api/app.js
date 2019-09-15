@@ -8,20 +8,22 @@ const sequelize = require('./config/db');
 const User = require('./models/User');
 const Word = require('./models/Word');
 const Language = require('./models/Language');
-const Category = require('./models/Category');
+const List = require('./models/List');
 
 // adds foreign key "language_id" to words table
 Language.hasMany(Word, { foreignKey: 'language_id' });
-// adds foreign key "user_id" to words table
+// adds foreign key "user_id" to lists table, list will be deleted if user is deleted
+User.hasMany(List, { foreignKey: 'user_id', onDelete: 'cascade' });
+// adds foreign key "user_id" to words table, word will be deleted if user is deleted
 User.hasMany(Word, { foreignKey: 'user_id', onDelete: 'cascade' });
-// create bridge table between categories and words
-Category.belongsToMany(Word, {
-    through: 'WordCategory',
-    foreignKey: 'category_id',
+// create bridge table between lists and words
+List.belongsToMany(Word, {
+    through: 'words_lists',
+    foreignKey: 'list_id',
     onDelete: 'cascade'
 });
-Word.belongsToMany(Category, {
-    through: 'WordCategory',
+Word.belongsToMany(List, {
+    through: 'words_lists',
     foreignKey: 'word_id',
     onDelete: 'cascade'
 });
