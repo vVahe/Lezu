@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+
 const landingBackground = require('../../images/landing-bg.jpg');
 
 const Landing = () => {
@@ -71,7 +72,7 @@ const Landing = () => {
                     </div>
                 </div>
                 <div className="row my-5">
-                    <div className="col-lg-4 col-md-12">
+                    <div className="col-lg-6 col-md-12">
                         <i className="fa fa-check fa-5x d-block mt-5 mb-3"></i>
                         <p className="text-black-50 h5">
                             Correct answers, wrong answers and spelling mistakes
@@ -80,11 +81,12 @@ const Landing = () => {
                             words you have difficulty with.
                         </p>
                     </div>
-                    <div className="col-lg-4 col-md-12">
+                    <div className="col-lg-6 col-md-12">
                         <i className="fa fa-pencil-square-o fa-5x d-block mt-5 mb-3"></i>
                         <p className="text-black-50 h5">
                             Train your words using a wide variety of filters.
-                            Filter
+                            Select the recentely added words, the most trained
+                            words, untrained words and much more.
                         </p>
                     </div>
                 </div>

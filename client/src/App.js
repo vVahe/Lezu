@@ -65,7 +65,7 @@ class App extends Component {
 
         return (
             <BrowserRouter>
-                <div className="App mx-auto">
+                <div className="App container-fluid p-0 mx-auto">
                     {routes}
                     <Footer />
                 </div>

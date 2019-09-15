@@ -2,7 +2,7 @@ import React from 'react';
 
 const Footer = () => {
     return (
-        <div className="container-fluid bg-dark text-white py-4">
+        <div className="container-fluid bg-dark text-white mt-5 py-4">
             <p style={{ fontFamily: 'Inconsolata' }} className="m-0">
                 All rights reserved - vVahe &copy; 2019
             </p>
