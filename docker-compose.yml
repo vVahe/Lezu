@@ -8,8 +8,6 @@ services:
         environment:
             - MYSQL_ROOT_PASSWORD=password
             - MYSQL_DATABASE=lezu_db
-        volumes:
-            - ./api/db_scripts/:/docker-entrypoint-initdb.d/
 
     api:
         container_name: lezu_api
