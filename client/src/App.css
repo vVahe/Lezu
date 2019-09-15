@@ -1,6 +1,5 @@
 .App {
     text-align: center;
-    margin-bottom: 100px;
 }
 
 .App-logo {
@@ -33,14 +32,6 @@
     }
 }
 
-.footer {
-    height: 100px;
-}
-
-.footer > p {
-    line-height: 100px;
-}
-
 .register-form {
     width: 50%;
 }
@@ -51,4 +42,14 @@
 
 .review-border {
     border-width: thick;
+}
+
+.landing {
+    min-height: 100vh;
+}
+
+.landing > h1 {
+    font-size: 10em;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS',
+        sans-serif;
 }
