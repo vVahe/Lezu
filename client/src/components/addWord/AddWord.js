@@ -2,10 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { addWord } from '../../store/actions/wordlistActions';
-import { getCategories } from '../../store/actions/categoryActions';
 import { getLanguages } from '../../store/actions/languageActions';
 
-import CategoryInput from './CategoryInput';
 import LanguageInput from './LanguageInput';
 import WordInput from './WordInput';
 import WordMeaningInput from './WordMeaningInput';
@@ -15,12 +13,10 @@ class AddWord extends Component {
         word: '',
         word_meaning: '',
         language: null,
-        categories: null,
         errors: {}
     };
 
     componentDidMount() {
-        this.props.getCategories();
         this.props.getLanguages();
     }
 
@@ -44,10 +40,6 @@ class AddWord extends Component {
         this.setState({
             [e.target.name]: e.target.value
         });
-    };
-
-    categoryChangeHandler = input => {
-        this.setState({ categories: input });
     };
 
     languageChangeHandler = input => {
@@ -78,14 +70,6 @@ class AddWord extends Component {
                             />
                         </div>
                         <div className="form-row">
-                            <CategoryInput
-                                errors={errors}
-                                categoryOptions={this.props.category.categories}
-                                categoryChangeHandler={
-                                    this.categoryChangeHandler
-                                }
-                                categories={this.state.categories}
-                            />
                             <LanguageInput
                                 errors={errors}
                                 languageOptions={this.props.language.languages}
@@ -117,12 +101,11 @@ class AddWord extends Component {
 
 const mapStateToProps = state => ({
     auth: state.auth,
-    category: state.category,
     language: state.language,
     errors: state.errors
 });
 
 export default connect(
     mapStateToProps,
-    { getCategories, getLanguages, addWord }
+    { getLanguages, addWord }
 )(AddWord);

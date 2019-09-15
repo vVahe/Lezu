@@ -96,7 +96,6 @@ router.get(
 
 // return recently created words (1 day, 1 week, 1 month ago)
 // return difficult words
-// return words by categories
 // return words by language
 // return words last reviewed wrong (needs schema update)
 

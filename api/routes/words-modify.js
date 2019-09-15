@@ -7,7 +7,6 @@ const sequelize = require('../config/db');
 const addWordValidator = require('../validation/add-word-validator');
 
 const Word = require('../models/Word');
-const Category = require('../models/Category');
 
 /**
  * @route   POST /words-modify/add_word
@@ -25,7 +24,7 @@ router.post(
             return res.status(400).json(errors);
         }
 
-        const { word, word_meaning, language_id, categories } = req.body;
+        const { word, word_meaning, language_id } = req.body;
         const new_word = {
             word,
             word_meaning,
@@ -49,13 +48,6 @@ router.post(
                     return res.status(400).json(errors);
                 }
 
-                // add categories in wordcategory associations table
-                const categoryArray = categories.split(',');
-                categoryArray.forEach(category_id => {
-                    Category.findByPk(parseInt(category_id)).then(category => {
-                        word.addCategory(category);
-                    });
-                });
                 return res.json({ message: 'Word successfully added' });
             })
             .catch(err => {
@@ -157,51 +149,6 @@ router.post(
             .catch(err => {
                 return res.status(400).json(err);
             });
-    }
-);
-
-/**
- * @route   POST /words-modify/update_word_categories/:word_id
- * @desc    Update a word categories
- * @access  Private
- * FIXME: could be optimized maybe?
- * TODO: may need to add validation for categories
- */
-router.post(
-    '/update_word_categories/:word_id',
-    passport.authenticate('jwt', { session: false }),
-    (req, res, next) => {
-        // delete all categories associated with the word
-        sequelize
-            .model('WordCategory')
-            .destroy({
-                where: { word_id: req.params.word_id }
-            })
-            .then(result => {
-                // find the word
-                Word.findByPk(req.params.word_id)
-                    .then(word => {
-                        // add categories in wordcategory associations table
-                        const categoryArray = req.body.categories.split(',');
-                        categoryArray.forEach(category_id => {
-                            Category.findByPk(parseInt(category_id)).then(
-                                category => {
-                                    word.addCategory(category);
-                                }
-                            );
-                        });
-                        return res.json({
-                            message: 'Categories successfully added'
-                        });
-                    })
-                    .catch(err => {
-                        return res.status(400).json(err);
-                    });
-            })
-            .catch(err => {
-                return res.status(400).json(err);
-            });
-        // add all categories
     }
 );
 
