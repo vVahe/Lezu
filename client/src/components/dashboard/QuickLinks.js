@@ -13,8 +13,8 @@ export default function QuickLinks(props) {
                         className="col-md-12 col-lg-6 card quick-links"
                         to="/word-list"
                     >
-                        <div class="card-body mx-auto">
-                            <i class="fa fa-list-alt fa-5x"></i>
+                        <div className="card-body mx-auto">
+                            <i className="fa fa-list-alt fa-5x"></i>
                             <h4>Word list</h4>
                         </div>
                     </Link>
@@ -23,8 +23,8 @@ export default function QuickLinks(props) {
                         className="col-md-12 col-lg-6 card quick-links"
                         to="/reviewing"
                     >
-                        <div class="card-body">
-                            <i class="fa fa-check fa-5x"></i>
+                        <div className="card-body">
+                            <i className="fa fa-check fa-5x"></i>
                             <h4>Train words</h4>
                         </div>
                     </Link>

@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function ReviewResult(props) {
     return (
-        <table class="table table-striped shadow-lg bg-white mt-5">
+        <table className="table table-striped shadow-lg bg-white mt-5">
             <thead>
                 <tr>
                     <th scope="col">#</th>

@@ -15,8 +15,8 @@ export default function QuickReviewLinks(props) {
                         className="col-sm-12 col-md-6 col-lg-3 card quick-links"
                         to="/reviewing"
                     >
-                        <div class="card-body mx-auto">
-                            <i class="fa fa-clock-o fa-3x"></i>
+                        <div className="card-body mx-auto">
+                            <i className="fa fa-clock-o fa-3x"></i>
                             <h5>Review lastest added words</h5>
                         </div>
                     </Link>
@@ -25,8 +25,8 @@ export default function QuickReviewLinks(props) {
                         className="col-sm-12 col-md-6 col-lg-3 card quick-links"
                         to="/reviewing"
                     >
-                        <div class="card-body">
-                            <i class="fa fa-times fa-3x"></i>
+                        <div className="card-body">
+                            <i className="fa fa-times fa-3x"></i>
                             <h5>Review difficult words</h5>
                         </div>
                     </Link>
@@ -34,8 +34,8 @@ export default function QuickReviewLinks(props) {
                         className="col-sm-12 col-md-6 col-lg-3 card quick-links"
                         to="/reviewing"
                     >
-                        <div class="card-body mx-auto">
-                            <i class="fa fa-question-circle-o fa-3x"></i>
+                        <div className="card-body mx-auto">
+                            <i className="fa fa-question-circle-o fa-3x"></i>
                             <h5>Review random words</h5>
                         </div>
                     </Link>
@@ -43,8 +43,8 @@ export default function QuickReviewLinks(props) {
                         className="col-sm-12 col-md-6 col-lg-3 card quick-links"
                         to="/reviewing"
                     >
-                        <div class="card-body mx-auto">
-                            <i class="fa fa-graduation-cap fa-3x"></i>
+                        <div className="card-body mx-auto">
+                            <i className="fa fa-graduation-cap fa-3x"></i>
                             <h5>Review never reviewed words</h5>
                         </div>
                     </Link>

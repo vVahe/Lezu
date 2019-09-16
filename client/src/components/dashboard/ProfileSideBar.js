@@ -4,8 +4,8 @@ const defaultProfilePic = require('../../images/default-profile-pic.png');
 export default function ProfileSideBar(props) {
     return (
         <div className="col col-12 col-sm-12 col-md-4 col-lg-3 mb-2">
-            <div class="card profile-stats">
-                <div class="card-body">
+            <div className="card profile-stats p-2">
+                <div className="card-body">
                     <img src={`${defaultProfilePic}`} alt="profile pic" />
                 </div>
                 <h2>{props.username}</h2>

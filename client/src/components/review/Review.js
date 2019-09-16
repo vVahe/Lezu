@@ -64,7 +64,7 @@ class Review extends Component {
                     />
                 )}
 
-                {loaded && !done && (
+                {loaded && !done && words.length > 0 && (
                     <ReviewCard
                         counter={counter}
                         words={words}
@@ -77,6 +77,7 @@ class Review extends Component {
                         showResults={this.props.showResults}
                     />
                 )}
+                {loaded && !done && words.length === 0 && <p>No words found</p>}
 
                 {done && <ReviewResult words={words} />}
                 {done && (

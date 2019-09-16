@@ -8,9 +8,9 @@ export default function DifficultWords(props) {
             </div>
             <div className="container mb-5">
                 <div className="row">
-                    <div class="col-12 card py-4">
-                        <table class="table table-sm">
-                            <thead class="thead-light">
+                    <div className="col-12 card py-4">
+                        <table className="table table-sm">
+                            <thead className="thead-light">
                                 <tr>
                                     <th scope="col">Word</th>
                                     <th scope="col">Meaning</th>
@@ -18,9 +18,9 @@ export default function DifficultWords(props) {
                                 </tr>
                             </thead>
                             <tbody>
-                                {props.difficult_words.map(word => {
+                                {props.difficult_words.map((word, key) => {
                                     return (
-                                        <tr>
+                                        <tr key={key}>
                                             <td>{word.word}</td>
                                             <td>{word.word_meaning}</td>
                                             <td>{word.language_id}</td>

@@ -78,8 +78,8 @@ export default function ReviewCard(props) {
 
     return (
         <div>
-            <div class="card text-center mt-5">
-                <div class="card-header">
+            <div className="card text-center mt-5">
+                <div className="card-header">
                     <h5 className="card-title">
                         Give the correct translation of the words (
                         {props.counter + 1}/{props.words.length})
@@ -112,7 +112,7 @@ export default function ReviewCard(props) {
                         </div>
                     )}
                 </div>
-                <div class="card-footer text-muted">{nextButton}</div>
+                <div className="card-footer text-muted">{nextButton}</div>
             </div>
         </div>
     );

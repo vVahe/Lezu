@@ -27,7 +27,6 @@ export const getStats = () => async dispatch => {
             difficult_words
         });
     } catch (err) {
-        console.log(err);
         dispatch({
             type: GET_ERRORS,
             payload: err.response.data
