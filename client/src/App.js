@@ -55,6 +55,7 @@ class App extends Component {
                 <Fragment>
                     <Navbar />
                     <Route exact path="/" component={Dashboard} />
+                    <Route exact path="/dashboard" component={Dashboard} />
                     <Route exact path="/word-list" component={Wordlist} />
                     <Route exact path="/add-word" component={AddWord} />
                     <Route exact path="/reviewing" component={Review} />
@@ -65,10 +66,8 @@ class App extends Component {
 
         return (
             <BrowserRouter>
-                <div className="App container-fluid p-0 mx-auto">
-                    {routes}
-                    <Footer />
-                </div>
+                <div className="App container-fluid p-0 mx-auto">{routes}</div>
+                <Footer />
             </BrowserRouter>
         );
     }

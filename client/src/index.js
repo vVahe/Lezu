@@ -19,6 +19,7 @@ import wordlistReducer from './store/reducers/wordlistReducer';
 import errorsReducer from './store/reducers/errorReducer';
 import languageReducer from './store/reducers/languageReducer';
 import wordReviewReducer from './store/reducers/wordReviewReducer';
+import statsReducer from './store/reducers/statsReducer';
 
 // combine reducer to root reducer
 const rootReducer = combineReducers({
@@ -26,7 +27,8 @@ const rootReducer = combineReducers({
     wordlist: wordlistReducer,
     language: languageReducer,
     errors: errorsReducer,
-    wordReview: wordReviewReducer
+    wordReview: wordReviewReducer,
+    stats: statsReducer
 });
 
 //enable redux DevTools for browser

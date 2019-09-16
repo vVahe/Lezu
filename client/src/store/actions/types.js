@@ -14,3 +14,5 @@ export const UPDATE_WORD_IN_REVIEW = 'UPDATE_WORD_IN_REVIEW';
 export const WORD_CORRECT = 'WORD_CORRECT';
 export const WORD_INCORRECT = 'WORD_INCORRECT';
 export const SHOW_RESULTS = 'SHOW_RESULTS';
+
+export const SET_STATS = 'SET_STATS';

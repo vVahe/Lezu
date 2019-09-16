@@ -8,7 +8,7 @@ const Landing = () => {
         <React.Fragment>
             <div
                 style={{ backgroundImage: `url(${landingBackground})` }}
-                class="jumbotron jumbotron-fluid landing border-bottom"
+                className="jumbotron jumbotron-fluid landing border-bottom"
             >
                 <h1 className="mb-5 text-light">Lezu</h1>
                 <h4 className="landing-lead w-50 mx-auto text-light mb-5 pb-5">

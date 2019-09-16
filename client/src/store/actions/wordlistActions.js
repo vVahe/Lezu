@@ -37,8 +37,6 @@ export const addWord = (word, history) => dispatch => {
         language_id: word.language ? word.language.value : ''
     };
 
-    console.log(newWord);
-
     axios
         .post('/api/words-modify/add_word', newWord)
         .then(res => {

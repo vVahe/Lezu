@@ -13,7 +13,6 @@ export const getToReviewWords = url => dispatch => {
     axios
         .get('/api' + url)
         .then(res => {
-            console.log(res);
             dispatch(setToReviewWords(res.data));
         })
         .catch(err => {

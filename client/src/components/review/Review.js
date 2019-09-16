@@ -49,7 +49,7 @@ class Review extends Component {
 
         return (
             <div className="container my-5">
-                <h3>Review Words</h3>
+                <h1 className="display-2">Review Words</h1>
                 {!loaded && (
                     <p className="lead">
                         Choose which words to review by using the options below
@@ -64,7 +64,7 @@ class Review extends Component {
                     />
                 )}
 
-                {loaded && !done && (
+                {loaded && !done && words.length > 0 && (
                     <ReviewCard
                         counter={counter}
                         words={words}
@@ -77,6 +77,7 @@ class Review extends Component {
                         showResults={this.props.showResults}
                     />
                 )}
+                {loaded && !done && words.length === 0 && <p>No words found</p>}
 
                 {done && <ReviewResult words={words} />}
                 {done && (

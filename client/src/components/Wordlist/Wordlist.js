@@ -21,7 +21,7 @@ class Wordlist extends Component {
 
         return (
             <div className="mt-5">
-                <h1>Word List</h1>
+                <h1 className="display-2">Word List</h1>
                 <div className="container mt-5">
                     <Link
                         to="/add-word"

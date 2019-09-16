@@ -31,11 +31,6 @@ class Navbar extends Component {
                             Review
                         </NavLink>
                     </li>
-                    <li className="nav-item">
-                        <NavLink to="/profile" className="nav-link">
-                            Profile
-                        </NavLink>
-                    </li>
                 </ul>
 
                 <ul className="navbar-nav ml-auto">
@@ -86,8 +81,7 @@ class Navbar extends Component {
         return (
             <nav className="navbar navbar-expand-lg navbar-light bg-transparent">
                 <nav className="navbar navbar-light">
-                    <Link to="/" className="navbar-brand">
-                        <i className="fa fa-spinner fa-spin px-2" />
+                    <Link to="/" className="navbar-brand mr-5">
                         Lezu
                     </Link>
                 </nav>
