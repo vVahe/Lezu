@@ -16,15 +16,18 @@ const Word = require('../models/Word');
 router.post(
     '/add_word',
     passport.authenticate('jwt', { session: false }),
+
     (req, res, next) => {
         const { errors, passed } = addWordValidator(req.body);
 
+        // check if validation passed
         if (!passed) {
-            // validation did not pass send error
             return res.status(400).json(errors);
         }
 
+        // get parameters from req
         const { word, word_meaning, language_id } = req.body;
+        // create new word object
         const new_word = {
             word,
             word_meaning,

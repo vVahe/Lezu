@@ -8,49 +8,22 @@ const router = express.Router();
 const Op = Sequelize.Op;
 
 /**
- * @route   GET /language/search/:value
- * @desc    Get languages matching the value search paramater
- * @access  Public
- * Search language end-point for asynch autocomplete seaching
- */
-router.get('/search/:value', (req, res, next) => {
-    errors = {};
-
-    Language.findAll({
-        where: {
-            language_name: {
-                [Op.like]: `%${req.params.value}%`
-            }
-        }
-    })
-        .then(langs => {
-            const languages = langs.map(lang => {
-                return { value: lang.language_id, label: lang.language_name };
-            });
-            res.json({ languages });
-        })
-        .catch(err => {
-            res.status(400).json(err);
-        });
-});
-
-/**
  * @route   GET /language/all_languages
  * @desc    Get all languages
  * @access  Public
  * Returns all supported languages
  */
-router.get('/all_languages', (req, res, next) => {
-    Language.findAll()
-        .then(langs => {
-            const languages = langs.map(lang => {
-                return { value: lang.language_id, label: lang.language_name };
-            });
-            res.json({ languages });
-        })
-        .catch(err => {
-            res.status(400).json(err);
+router.get('/all_languages', async (req, res, next) => {
+    try {
+        const langs = await awaitLanguage.findAll();
+        // format language array
+        const languages = langs.map(lang => {
+            return { value: lang.language_id, label: lang.language_name };
         });
+        return res.json({ languages });
+    } catch (err) {
+        return res.status(400).json(err);
+    }
 });
 
 module.exports = router;

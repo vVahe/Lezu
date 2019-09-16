@@ -18,59 +18,60 @@ const User = require('../models/User');
  * @desc    Login user by returning JWT token
  * @access  Public
  */
-router.post('/login', (req, res, next) => {
+router.post('/login', async (req, res, next) => {
     const { errors, passed } = loginValidator(req.body);
 
     // check if validation passed
     if (!passed) {
-        // send validation errors
         return res.status(400).json(errors);
     }
 
-    // find user with incoming username
-    // TODO: login with email
-    User.findOne({ where: { username: req.body.username } }).then(user => {
+    try {
+        // find user with incoming username
+        // TODO: login with email
+        const user = await User.findOne({
+            where: { username: req.body.username }
+        });
+
+        // if a user is not found
         if (!user) {
-            // if a user is not found
             errors.username = 'User with this username was not found';
             return res.status(400).json(errors);
         }
 
-        // compare incoming & db password
-        bcrypt.compare(req.body.password, user.password).then(isMatch => {
-            if (isMatch) {
-                // password correct send back JWT token
+        // compare incoming password & db password
+        const isMatch = await bcrypt.compare(req.body.password, user.password);
 
-                // create payload for the JWT token
-                const payload = {
-                    user_id: user.user_id,
-                    username: user.username,
-                    first_name: user.first_name,
-                    last_name: user.last_name,
-                    email: user.email
-                };
+        // if password matches send back JWToken
+        if (isMatch) {
+            const payload = {
+                user_id: user.user_id,
+                username: user.username,
+                first_name: user.first_name,
+                last_name: user.last_name,
+                email: user.email
+            };
 
-                // sign token
-                jwt.sign(
-                    payload,
-                    keys.secretOrKey,
-                    // FIXME: set JWToken expire date to 60 min in production
-                    { expiresIn: 3600 * 24 },
-                    (err, token) => {
-                        // return token
-                        return res.json({
-                            success: true,
-                            token: 'Bearer ' + token
-                        });
-                    }
-                );
-            } else {
-                // password incorrect send back error msg
-                errors.password = 'Password was incorrect';
-                return res.status(400).json(errors);
-            }
-        });
-    });
+            jwt.sign(
+                payload,
+                keys.secretOrKey,
+                // FIXME: set JWToken expire date to 60 min in production
+                { expiresIn: 3600 * 24 },
+                (err, token) => {
+                    // return token
+                    return res.json({
+                        success: true,
+                        token: 'Bearer ' + token
+                    });
+                }
+            );
+        } else {
+            errors.password = 'Password was incorrect';
+            return res.status(400).json(errors);
+        }
+    } catch (err) {
+        console.log(err);
+    }
 });
 
 /**
@@ -83,7 +84,6 @@ router.post('/register', (req, res, next) => {
 
     // check if validation passed
     if (!passed) {
-        // send validation errors
         return res.status(400).json(errors);
     }
 
@@ -119,12 +119,5 @@ router.post('/register', (req, res, next) => {
         });
     });
 });
-
-/**
- * @route   GET /auth/logout
- * @desc    Logout user
- * @access  Private
- */
-router.post('/logout', (req, res, next) => {});
 
 module.exports = router;

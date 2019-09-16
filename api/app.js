@@ -34,7 +34,6 @@ const port = process.env.PORT || 5000;
 /** routers */
 const authRouter = require('./routes/auth');
 
-const profileRouter = require('./routes/profile');
 const languageRouter = require('./routes/language');
 const wordsModifyRouter = require('./routes/words-modify');
 const wordsRetrieveRouter = require('./routes/word-retrieve');
@@ -49,7 +48,6 @@ app.use(passport.initialize());
 require('./config/passport')(passport);
 
 app.use('/auth', authRouter);
-app.use('/profile', profileRouter);
 app.use('/language', languageRouter);
 app.use('/words-modify', wordsModifyRouter);
 app.use('/words-retrieve', wordsRetrieveRouter);
