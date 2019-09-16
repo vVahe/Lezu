@@ -53,3 +53,17 @@
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS',
         sans-serif;
 }
+
+.profile-stats > * span {
+    color: dimgray;
+}
+
+.quick-links {
+    color: brown;
+    text-decoration: none;
+}
+
+.quick-links:hover {
+    text-decoration: none;
+    background-color: aliceblue;
+}
