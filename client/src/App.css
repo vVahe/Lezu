@@ -67,3 +67,11 @@
     text-decoration: none;
     background-color: aliceblue;
 }
+
+.review-ql-1 {
+    text-decoration: none;
+}
+
+.review-ql-1:hover {
+    text-decoration: none;
+}
