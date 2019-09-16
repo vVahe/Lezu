@@ -33,10 +33,10 @@ const port = process.env.PORT || 5000;
 
 /** routers */
 const authRouter = require('./routes/auth');
-
+const listRouter = require('./routes/list');
 const languageRouter = require('./routes/language');
 const wordsModifyRouter = require('./routes/words-modify');
-const wordsRetrieveRouter = require('./routes/word-retrieve');
+const wordsRetrieveRouter = require('./routes/words-retrieve');
 
 /** Body parser middleware */
 app.use(cors());
@@ -51,6 +51,7 @@ app.use('/auth', authRouter);
 app.use('/language', languageRouter);
 app.use('/words-modify', wordsModifyRouter);
 app.use('/words-retrieve', wordsRetrieveRouter);
+app.use('/lists', listRouter);
 
 app.listen(port, () => {
     console.log(`express listening on port ${port}`);

@@ -15,7 +15,7 @@ const Op = Sequelize.Op;
  */
 router.get('/all_languages', async (req, res, next) => {
     try {
-        const langs = await awaitLanguage.findAll();
+        const langs = await Language.findAll();
         // format language array
         const languages = langs.map(lang => {
             return { value: lang.language_id, label: lang.language_name };

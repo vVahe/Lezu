@@ -7,7 +7,7 @@ const User = require('./User');
  * The following model defines the lists schema
  * @list_id    : id of the list
  * @list_name  : list name
- * @list_user  : user the list belongs to (added through model associations, see app.js)
+ * @user_id  : user the list belongs to (added through model associations, see app.js)
  * Users can have one or more lists
  */
 const List = sequelize.define(
