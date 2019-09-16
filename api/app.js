@@ -37,6 +37,7 @@ const listRouter = require('./routes/list');
 const languageRouter = require('./routes/language');
 const wordsModifyRouter = require('./routes/words-modify');
 const wordsRetrieveRouter = require('./routes/words-retrieve');
+const statsRouter = require('./routes/stats');
 
 /** Body parser middleware */
 app.use(cors());
@@ -52,6 +53,7 @@ app.use('/language', languageRouter);
 app.use('/words-modify', wordsModifyRouter);
 app.use('/words-retrieve', wordsRetrieveRouter);
 app.use('/lists', listRouter);
+app.use('/stats', statsRouter);
 
 app.listen(port, () => {
     console.log(`express listening on port ${port}`);
