@@ -17,7 +17,6 @@ import './index.css';
 import authReducer from './store/reducers/authReducer';
 import wordlistReducer from './store/reducers/wordlistReducer';
 import errorsReducer from './store/reducers/errorReducer';
-import categoryReducer from './store/reducers/categoryReducer';
 import languageReducer from './store/reducers/languageReducer';
 import wordReviewReducer from './store/reducers/wordReviewReducer';
 
@@ -25,7 +24,6 @@ import wordReviewReducer from './store/reducers/wordReviewReducer';
 const rootReducer = combineReducers({
     auth: authReducer,
     wordlist: wordlistReducer,
-    category: categoryReducer,
     language: languageReducer,
     errors: errorsReducer,
     wordReview: wordReviewReducer

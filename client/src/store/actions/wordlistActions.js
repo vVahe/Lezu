@@ -31,19 +31,10 @@ export const deleteWord = word_id => dispatch => {
 };
 
 export const addWord = (word, history) => dispatch => {
-    // store category ids in array
-    let idsArr;
-    if (word.categories) {
-        idsArr = word.categories.map(cat => {
-            return cat.value;
-        });
-    }
-
     const newWord = {
         word: word.word.toLowerCase().trim(),
         word_meaning: word.word_meaning.toLowerCase().trim(),
-        language_id: word.language ? word.language.value : '',
-        categories: idsArr ? idsArr.join(',') : ''
+        language_id: word.language ? word.language.value : ''
     };
 
     console.log(newWord);

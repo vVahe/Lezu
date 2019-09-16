@@ -6,11 +6,12 @@ const sequelize = require('../config/db');
  * @word_id         : id of @word
  * @word            : word to be learned
  * @word_meaning    : translation of the @word to be learned
- * @lang_id         : language of @word (added through model associations)
- * @user_id         : the user that created the @word (added through model associations)
+ * @lang_id         : language of @word (added through model associations, see app.js)
+ * @user_id         : the user that created the @word (added through model associations, see app.js)
  * @times_reviewed  : number of times @word has been reviewed
  * @times_correct   : number of times @word was reviews correctly
  * @times_incorrect : number of times @word was reviewed incorrectly
+ * @spelling_error  : the degree of spelling errors made for this word
  * @created_at      : time user is created (auto-generated)
  * @updated_at      : time user is updated (auto-generated)
  *
@@ -42,6 +43,10 @@ const Word = sequelize.define(
             defaultValue: 0
         },
         times_incorrect: {
+            type: Sequelize.INTEGER,
+            defaultValue: 0
+        },
+        spelling_error: {
             type: Sequelize.INTEGER,
             defaultValue: 0
         }

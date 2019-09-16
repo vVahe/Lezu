@@ -13,24 +13,15 @@ const Word = require('../models/Word');
 router.get(
     '/all_words',
     passport.authenticate('jwt', { session: false }),
-    (req, res, next) => {
-        const errors = {};
-
-        // find all words
-        Word.findAll({ where: { user_id: req.user.user_id } })
-            .then(words => {
-                // if no words were found return error
-                if (Object.keys(words).length === 0) {
-                    errors.words = 'no words found';
-                    return res.status(400).json(errors);
-                }
-
-                // else return found words
-                return res.json(words);
-            })
-            .catch(err => {
-                return res.status(400).json(err);
+    async (req, res, next) => {
+        try {
+            const words = await Word.findAll({
+                where: { user_id: req.user.user_id }
             });
+            return res.json(words);
+        } catch (err) {
+            return res.status(400).json(err);
+        }
     }
 );
 
@@ -42,27 +33,15 @@ router.get(
 router.get(
     '/unreviewed_words',
     passport.authenticate('jwt', { session: false }),
-    (req, res, next) => {
-        const errors = {};
-
-        // find all words
-        Word.findAll({
-            where: { user_id: req.user.user_id, times_reviewed: 0 }
-        })
-            .then(words => {
-                // if no words were found return error
-                if (Object.keys(words).length === 0) {
-                    errors.words =
-                        'No words found that have not been reviewed yet';
-                    return res.status(400).json(errors);
-                }
-
-                // else return found words
-                return res.json(words);
-            })
-            .catch(err => {
-                return res.status(400).json(err);
+    async (req, res, next) => {
+        try {
+            const words = await Word.findAll({
+                where: { user_id: req.user.user_id, times_reviewed: 0 }
             });
+            return res.json(words);
+        } catch (err) {
+            return res.status(400).json(err);
+        }
     }
 );
 
@@ -96,7 +75,6 @@ router.get(
 
 // return recently created words (1 day, 1 week, 1 month ago)
 // return difficult words
-// return words by categories
 // return words by language
 // return words last reviewed wrong (needs schema update)
 

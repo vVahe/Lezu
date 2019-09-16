@@ -36,10 +36,10 @@ const Landing = () => {
                         </div>
                     </div>
                 </div>
-                <a
+                <p
                     style={{ marginTop: '20vh' }}
                     className="fa fa-angle-down fa-5x text-white"
-                ></a>
+                ></p>
             </div>
             <div style={{ marginTop: '100px' }} className="container my-5">
                 <h1 className="display-1">Features</h1>
