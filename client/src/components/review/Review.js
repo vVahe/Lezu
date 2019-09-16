@@ -49,7 +49,7 @@ class Review extends Component {
 
         return (
             <div className="container my-5">
-                <h3>Review Words</h3>
+                <h1 className="display-2">Review Words</h1>
                 {!loaded && (
                     <p className="lead">
                         Choose which words to review by using the options below

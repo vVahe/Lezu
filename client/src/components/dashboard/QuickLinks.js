@@ -21,7 +21,7 @@ export default function QuickLinks(props) {
 
                     <Link
                         className="col-md-12 col-lg-6 card quick-links"
-                        to="/word-list"
+                        to="/reviewing"
                     >
                         <div class="card-body">
                             <i class="fa fa-check fa-5x"></i>

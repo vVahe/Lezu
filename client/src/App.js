@@ -55,6 +55,7 @@ class App extends Component {
                 <Fragment>
                     <Navbar />
                     <Route exact path="/" component={Dashboard} />
+                    <Route exact path="/dashboard" component={Dashboard} />
                     <Route exact path="/word-list" component={Wordlist} />
                     <Route exact path="/add-word" component={AddWord} />
                     <Route exact path="/reviewing" component={Review} />

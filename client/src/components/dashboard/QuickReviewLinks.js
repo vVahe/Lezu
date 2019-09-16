@@ -12,8 +12,8 @@ export default function QuickReviewLinks(props) {
             <div className="container mb-5">
                 <div className="row justify-content-center">
                     <Link
-                        className="col-sm-12 col-md-6 col-lg-3 card review-ql-1"
-                        to="/word-list"
+                        className="col-sm-12 col-md-6 col-lg-3 card quick-links"
+                        to="/reviewing"
                     >
                         <div class="card-body mx-auto">
                             <i class="fa fa-clock-o fa-3x"></i>
@@ -22,8 +22,8 @@ export default function QuickReviewLinks(props) {
                     </Link>
 
                     <Link
-                        className="col-sm-12 col-md-6 col-lg-3 card review-ql-2"
-                        to="/word-list"
+                        className="col-sm-12 col-md-6 col-lg-3 card quick-links"
+                        to="/reviewing"
                     >
                         <div class="card-body">
                             <i class="fa fa-times fa-3x"></i>
@@ -31,8 +31,8 @@ export default function QuickReviewLinks(props) {
                         </div>
                     </Link>
                     <Link
-                        className="col-sm-12 col-md-6 col-lg-3 card review-ql-3"
-                        to="/word-list"
+                        className="col-sm-12 col-md-6 col-lg-3 card quick-links"
+                        to="/reviewing"
                     >
                         <div class="card-body mx-auto">
                             <i class="fa fa-question-circle-o fa-3x"></i>
@@ -40,8 +40,8 @@ export default function QuickReviewLinks(props) {
                         </div>
                     </Link>
                     <Link
-                        className="col-sm-12 col-md-6 col-lg-3 card review-ql-4"
-                        to="/word-list"
+                        className="col-sm-12 col-md-6 col-lg-3 card quick-links"
+                        to="/reviewing"
                     >
                         <div class="card-body mx-auto">
                             <i class="fa fa-graduation-cap fa-3x"></i>

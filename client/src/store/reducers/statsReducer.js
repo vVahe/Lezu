@@ -3,7 +3,7 @@ import { SET_STATS } from '../actions/types';
 const initialState = {
     recent_words: [],
     difficult_words: [],
-    nr_word: null,
+    nr_words: null,
     nr_lists: null,
     nr_languages: null,
     nr_words_reviewed: null,
@@ -18,7 +18,7 @@ export default function(state = initialState, action) {
                 ...state,
                 recent_words: action.recent_words,
                 difficult_words: action.difficult_words,
-                nr_word: action.nr_word,
+                nr_words: action.nr_words,
                 nr_lists: action.nr_lists,
                 nr_languages: action.nr_languages,
                 nr_words_reviewed: action.nr_words_reviewed,

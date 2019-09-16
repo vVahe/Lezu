@@ -24,7 +24,7 @@ router.get(
                 q1[0][Object.keys(q1[0])[0]]
             );
             const q2 = await sequelize.query(
-                'SELECT SUM(times_reviewed) as nr_times_reviewed FROM words',
+                'SELECT SUM(times_reviewed) as nr_words_reviewed FROM words',
                 {
                     type: sequelize.QueryTypes.SELECT
                 }
@@ -33,7 +33,7 @@ router.get(
                 q2[0][Object.keys(q2[0])[0]]
             );
             const q3 = await sequelize.query(
-                'SELECT SUM(times_correct) as nr_times_correct FROM words',
+                'SELECT SUM(times_correct) as nr_words_correct FROM words',
                 {
                     type: sequelize.QueryTypes.SELECT
                 }
@@ -42,7 +42,7 @@ router.get(
                 q3[0][Object.keys(q3[0])[0]]
             );
             const q4 = (result.nr_times_incorrect = await sequelize.query(
-                'SELECT SUM(times_incorrect) as nr_times_incorrect FROM words',
+                'SELECT SUM(times_incorrect) as nr_words_incorrect FROM words',
                 {
                     type: sequelize.QueryTypes.SELECT
                 }
