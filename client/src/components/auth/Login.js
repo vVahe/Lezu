@@ -54,87 +54,120 @@ class Login extends Component {
         const { errors } = this.state;
 
         return (
-            <div className="card register-form mx-auto my-5 shadow-lg">
-                <div className="card-header">
-                    <h3>Login</h3>
-                </div>
-                <div className="card-body">
-                    <p className="lead">Login to your Lezu account</p>
-                    <form className="my-4" noValidate onSubmit={this.onSubmit}>
-                        <div className="col-auto my-4">
-                            <label className="sr-only" htmlFor="username">
-                                Username
-                            </label>
-                            <div className="input-group">
-                                <div className="input-group-prepend">
-                                    <div className="input-group-text">
-                                        <i className="fa fa-user" />
-                                    </div>
-                                </div>
-                                <input
-                                    name="username"
-                                    type="text"
-                                    className={classnames('form-control', {
-                                        'is-invalid': errors.username
-                                    })}
-                                    id="username"
-                                    placeholder="username"
-                                    value={this.state.username}
-                                    onChange={this.onChange}
-                                />
+            <React.Fragment>
+                <div className="row m-0">
+                    <div className="col col-sm-11 col-md-6 col-lg-4 mx-auto">
+                        <div className="card register-form mx-auto my-5 shadow-lg">
+                            <div className="card-header">
+                                <h3>Login</h3>
                             </div>
-                            {errors.username && (
-                                <div className="invalid-feeback float-left text-danger mb-2 mt-1">
-                                    {errors.username}
-                                </div>
-                            )}
-                        </div>
-
-                        <div className="col-auto my-4">
-                            <label className="sr-only" htmlFor="password">
-                                Password
-                            </label>
-                            <div className="input-group">
-                                <div className="input-group-prepend">
-                                    <div className="input-group-text">
-                                        <i className="fa fa-key" />
+                            <div className="card-body">
+                                <p className="lead">
+                                    Login to your Lezu account
+                                </p>
+                                <form
+                                    className="my-4"
+                                    noValidate
+                                    onSubmit={this.onSubmit}
+                                >
+                                    <div className="col-auto my-4">
+                                        <label
+                                            className="sr-only"
+                                            htmlFor="username"
+                                        >
+                                            Username
+                                        </label>
+                                        <div className="input-group">
+                                            <div className="input-group-prepend">
+                                                <div className="input-group-text">
+                                                    <i className="fa fa-user" />
+                                                </div>
+                                            </div>
+                                            <input
+                                                name="username"
+                                                type="text"
+                                                className={classnames(
+                                                    'form-control',
+                                                    {
+                                                        'is-invalid':
+                                                            errors.username
+                                                    }
+                                                )}
+                                                id="username"
+                                                placeholder="username"
+                                                value={this.state.username}
+                                                onChange={this.onChange}
+                                            />
+                                        </div>
+                                        {errors.username && (
+                                            <div className="invalid-feeback float-left text-danger mb-2 mt-1">
+                                                {errors.username}
+                                            </div>
+                                        )}
                                     </div>
-                                </div>
-                                <input
-                                    name="password"
-                                    type="password"
-                                    className={classnames('form-control', {
-                                        'is-invalid': errors.password
-                                    })}
-                                    id="password"
-                                    placeholder="password"
-                                    value={this.state.password}
-                                    onChange={this.onChange}
-                                />
-                            </div>
-                            {errors.password && (
-                                <div className="invalid-feeback float-left text-danger mb-2 mt-1">
-                                    {errors.password}
-                                </div>
-                            )}
-                        </div>
 
-                        <button
-                            className="btn btn-primary btn-block w-50 mx-auto mt-5"
-                            type="submit"
-                        >
-                            Login
-                        </button>
-                    </form>
-                    <Link to="/forgot-password">
-                        <p className="d-inline">Forgot password?</p>
-                    </Link>
-                    <p className="d-inline mx-4">|</p>
-                    <Link to="/register" className="d-inline">
-                        <p className="d-inline">No account? Register here!</p>
-                    </Link>
+                                    <div className="col-auto my-4">
+                                        <label
+                                            className="sr-only"
+                                            htmlFor="password"
+                                        >
+                                            Password
+                                        </label>
+                                        <div className="input-group">
+                                            <div className="input-group-prepend">
+                                                <div className="input-group-text">
+                                                    <i className="fa fa-key" />
+                                                </div>
+                                            </div>
+                                            <input
+                                                name="password"
+                                                type="password"
+                                                className={classnames(
+                                                    'form-control',
+                                                    {
+                                                        'is-invalid':
+                                                            errors.password
+                                                    }
+                                                )}
+                                                id="password"
+                                                placeholder="password"
+                                                value={this.state.password}
+                                                onChange={this.onChange}
+                                            />
+                                        </div>
+                                        {errors.password && (
+                                            <div className="invalid-feeback float-left text-danger mb-2 mt-1">
+                                                {errors.password}
+                                            </div>
+                                        )}
+                                    </div>
+
+                                    <button
+                                        className="btn btn-outline-primary btn-block w-50 mx-auto mt-5"
+                                        type="submit"
+                                    >
+                                        Login
+                                    </button>
+                                </form>
+                                {/* <Link to="/forgot-password">
+                                <p className="d-inline">Forgot password?</p>
+                            </Link>
+                            <p className="d-inline mx-4">|</p> */}
+                                <Link to="/register" className="d-inline">
+                                    <p className="d-inline">
+                                        No account? Register here!
+                                    </p>
+                                </Link>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
+                <div className="row">
+                    <div className="col">
+                        <Link to="/">Back to home</Link>
+                    </div>
+                </div>
+            </React.Fragment>
         );
     }
 }

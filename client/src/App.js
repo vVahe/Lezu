@@ -65,10 +65,8 @@ class App extends Component {
 
         return (
             <BrowserRouter>
-                <div className="App container-fluid p-0 mx-auto">
-                    {routes}
-                    <Footer />
-                </div>
+                <div className="App container-fluid p-0 mx-auto">{routes}</div>
+                <Footer />
             </BrowserRouter>
         );
     }
