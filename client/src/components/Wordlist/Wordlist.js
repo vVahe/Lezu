@@ -7,6 +7,15 @@ import { Link } from 'react-router-dom';
 import Word from './Word';
 
 class Wordlist extends Component {
+    state = {
+        language: null,
+        list: null,
+        amount: 20,
+        unreviewed: false,
+        difficult: false,
+        spelling: false
+    };
+
     componentDidMount() {
         this.props.getWordlist();
     }
