@@ -26,11 +26,12 @@ router.post(
         }
 
         // get parameters from req
-        const { word, word_meaning, language_id } = req.body;
+        const { word, word_meaning, word_note, language_id } = req.body;
         // create new word object
         const new_word = {
             word,
             word_meaning,
+            word_note,
             language_id,
             user_id: req.body.user_id
         };
@@ -130,10 +131,11 @@ router.post(
             return res.status(400).json(errors);
         }
 
-        const { word, word_meaning, language_id } = req.body;
+        const { word, word_meaning, word_note, language_id } = req.body;
         const updatedWord = {
             word,
             word_meaning,
+            word_note,
             language_id
         };
 
