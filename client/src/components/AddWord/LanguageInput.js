@@ -3,10 +3,11 @@ import Select from 'react-select';
 
 export default function LanguageInput(props) {
     return (
-        <div className="col my-4 form-group">
-            <label>
-                <h5>Language</h5>
+        <div className="col-12 col-sm-12 col-md-6 form-group">
+            <label className="col-12 ml-1 mx-0 px-0">
+                <h5 className="float-left">Language</h5>
             </label>
+
             <Select
                 value={props.language}
                 options={props.languageOptions}

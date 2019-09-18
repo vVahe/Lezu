@@ -30,13 +30,7 @@ export const deleteWord = word_id => dispatch => {
         });
 };
 
-export const addWord = (word, history) => dispatch => {
-    const newWord = {
-        word: word.word.toLowerCase().trim(),
-        word_meaning: word.word_meaning.toLowerCase().trim(),
-        language_id: word.language ? word.language.value : ''
-    };
-
+export const addWord = (newWord, history) => dispatch => {
     axios
         .post('/api/words-modify/add_word', newWord)
         .then(res => {
@@ -46,4 +40,21 @@ export const addWord = (word, history) => dispatch => {
         .catch(err => {
             dispatch({ type: GET_ERRORS, payload: err.response.data });
         });
+};
+
+export const getWordlistSort = (e, value) => async dispatch => {
+    e.preventDefault();
+    if (value === 'none') {
+        return;
+    }
+    const values = value.split(' ');
+
+    try {
+        const res = await axios.get(
+            'api/words-retrieve/all_words_sort/' + values[0] + '/' + values[1]
+        );
+        dispatch(setWordlist(res.data));
+    } catch (err) {
+        dispatch({ type: GET_ERRORS, payload: err.response.data });
+    }
 };

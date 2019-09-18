@@ -25,7 +25,7 @@ export default function QuickLinks(props) {
                     >
                         <div className="card-body">
                             <i className="fa fa-check fa-5x"></i>
-                            <h4>Train words</h4>
+                            <h4>Review words</h4>
                         </div>
                     </Link>
                 </div>

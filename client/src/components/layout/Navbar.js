@@ -17,30 +17,30 @@ class Navbar extends Component {
                 <ul className="navbar-nav mr-auto">
                     <li className="nav-item">
                         <NavLink to="/dashboard" className="nav-link">
-                            Dashboard
+                            <h5>Dashboard</h5>
                         </NavLink>
                     </li>
                     <li className="nav-item">
                         <NavLink to="word-list" className="nav-link">
-                            Word List
+                            <h5>Word List</h5>
                         </NavLink>
                     </li>
 
                     <li className="nav-item">
                         <NavLink to="reviewing" className="nav-link">
-                            Review
+                            <h5>Review</h5>
                         </NavLink>
                     </li>
                 </ul>
 
                 <ul className="navbar-nav ml-auto">
-                    <li className="nav-item">
-                        <p>{user.username}</p>
+                    <li className="nav-item list-group-item">
+                        Logged in as {user.username}
                     </li>
                     <li className="nav-item">
                         <Link to="/">
                             <button
-                                className="btn btn-outline-primary m-2 my-sm-0"
+                                className="btn btn-lg btn-outline-primary m-2 my-sm-0"
                                 onClick={this.logoutHandler}
                             >
                                 Logout
@@ -79,25 +79,32 @@ class Navbar extends Component {
         );
 
         return (
-            <nav className="navbar navbar-expand-lg navbar-light bg-transparent">
-                <nav className="navbar navbar-light">
-                    <Link to="/" className="navbar-brand mr-5">
-                        Lezu
-                    </Link>
-                </nav>
-                <button
-                    className="navbar-toggler"
-                    type="button"
-                    data-toggle="collapse"
-                    data-target="#navbarCollapse"
-                >
-                    <span className="navbar-toggler-icon" />
-                </button>
+            <div className="bg-white border border-bottom mb-5">
+                <div className="container">
+                    <nav className="navbar navbar-expand-lg navbar-light bg-transparent">
+                        <nav className="navbar navbar-light">
+                            <Link to="/" className="navbar-brand mr-5">
+                                <h4>Lezu</h4>
+                            </Link>
+                        </nav>
+                        <button
+                            className="navbar-toggler"
+                            type="button"
+                            data-toggle="collapse"
+                            data-target="#navbarCollapse"
+                        >
+                            <span className="navbar-toggler-icon" />
+                        </button>
 
-                <div className="collapse navbar-collapse" id="navbarCollapse">
-                    {isAuthenticated ? authLinks : guestLinks}
+                        <div
+                            className="collapse navbar-collapse"
+                            id="navbarCollapse"
+                        >
+                            {isAuthenticated ? authLinks : guestLinks}
+                        </div>
+                    </nav>
                 </div>
-            </nav>
+            </div>
         );
     }
 }

@@ -6,6 +6,7 @@ const sequelize = require('../config/db');
  * @word_id         : id of @word
  * @word            : word to be learned
  * @word_meaning    : translation of the @word to be learned
+ * @word_note       : optional node which can be added to the word
  * @lang_id         : language of @word (added through model associations, see app.js)
  * @user_id         : the user that created the @word (added through model associations, see app.js)
  * @times_reviewed  : number of times @word has been reviewed
@@ -34,6 +35,10 @@ const Word = sequelize.define(
             type: Sequelize.STRING,
             allowNull: false
         },
+        word_note: {
+            type: Sequelize.STRING,
+            allowNull: true
+        },
         times_reviewed: {
             type: Sequelize.INTEGER,
             defaultValue: 0
@@ -51,7 +56,7 @@ const Word = sequelize.define(
             defaultValue: 0
         }
     },
-    { underscored: true }
+    { underscored: true, charset: 'utf8mb4', collate: 'utf8mb4_unicode_ci' }
 );
 
 module.exports = Word;
