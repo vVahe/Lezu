@@ -30,13 +30,7 @@ export const deleteWord = word_id => dispatch => {
         });
 };
 
-export const addWord = (word, history) => dispatch => {
-    const newWord = {
-        word: word.word.toLowerCase().trim(),
-        word_meaning: word.word_meaning.toLowerCase().trim(),
-        language_id: word.language ? word.language.value : ''
-    };
-
+export const addWord = (newWord, history) => dispatch => {
     axios
         .post('/api/words-modify/add_word', newWord)
         .then(res => {

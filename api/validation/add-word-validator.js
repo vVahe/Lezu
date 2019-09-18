@@ -23,7 +23,7 @@ module.exports = validate = input => {
 
     // check if word_note length is less than 250 characters
     if (!validator.isLength(word_note.trim(), { max: 250 })) {
-        errors.word = 'Word note can be at most 250 characters';
+        errors.word_note = 'Word note can be at most 250 characters';
     }
 
     // check if word is filled in

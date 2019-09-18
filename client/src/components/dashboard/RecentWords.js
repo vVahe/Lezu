@@ -13,8 +13,8 @@ export default function RecentWords(props) {
                 <div className="row">
                     <div className="col-12 card py-4">
                         {props.recent_words.length > 0 && (
-                            <ul class="list-group list-group-flush ">
-                                <li class="list-group-item list-group-item-primary">
+                            <ul className="list-group list-group-flush ">
+                                <li className="list-group-item list-group-item-primary">
                                     <div className="container">
                                         <div className="row">
                                             <h4 className="col-6">Word</h4>
@@ -25,7 +25,10 @@ export default function RecentWords(props) {
 
                                 {props.recent_words.map((word, key) => {
                                     return (
-                                        <li key={key} class="list-group-item">
+                                        <li
+                                            key={key}
+                                            className="list-group-item"
+                                        >
                                             <div className="container">
                                                 <div className="row">
                                                     <h5 className="col-6 float-left">
