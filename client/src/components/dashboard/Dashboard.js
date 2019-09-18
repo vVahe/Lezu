@@ -2,7 +2,6 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import ProfileSideBar from './ProfileSideBar';
 import QuickLinks from './QuickLinks';
-import QuickReviewLinks from './QuickReviewLinks';
 import RecentWords from './RecentWords';
 import DifficultWords from './DifficultWords';
 import { getStats } from '../../store/actions/statsActions';
@@ -27,8 +26,6 @@ class Dashboard extends Component {
 
         return (
             <Fragment>
-                <h1 className="display-2 my-2">Dashboard</h1>
-                <hr />
                 <div className="row w-75 mx-auto">
                     <ProfileSideBar
                         username={user.username}
@@ -41,7 +38,6 @@ class Dashboard extends Component {
                     />
                     <div className="col-12 col-sm-12 col-md-8 col-lg-9">
                         <QuickLinks />
-                        <QuickReviewLinks />
                         <RecentWords recent_words={recent_words} />
                         <DifficultWords difficult_words={difficult_words} />
                     </div>
