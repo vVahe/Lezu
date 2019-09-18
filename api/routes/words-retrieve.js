@@ -26,6 +26,29 @@ router.get(
 );
 
 /**
+ * @route   GET /words-retrieve/all_words_sort/:sortby/:order
+ * @desc    GET all words of the logged in user
+ * @access  Private
+ */
+router.get(
+    '/all_words_sort/:sortby/:order',
+    passport.authenticate('jwt', { session: false }),
+    async (req, res, next) => {
+        try {
+            const words = await Word.findAll({
+                where: { user_id: req.user.user_id },
+                order: [[`${req.params.sortby}`, `${req.params.order}`]]
+            });
+            console.log(words);
+
+            return res.json(words);
+        } catch (err) {
+            return res.status(400).json(err);
+        }
+    }
+);
+
+/**
  * @route   GET /words-retrieve/unreviewed_words
  * @desc    GET all words which have never been reviewed before
  * @access  Private

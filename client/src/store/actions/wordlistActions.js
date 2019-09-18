@@ -41,3 +41,20 @@ export const addWord = (newWord, history) => dispatch => {
             dispatch({ type: GET_ERRORS, payload: err.response.data });
         });
 };
+
+export const getWordlistSort = (e, value) => async dispatch => {
+    e.preventDefault();
+    if (value === 'none') {
+        return;
+    }
+    const values = value.split(' ');
+
+    try {
+        const res = await axios.get(
+            'api/words-retrieve/all_words_sort/' + values[0] + '/' + values[1]
+        );
+        dispatch(setWordlist(res.data));
+    } catch (err) {
+        dispatch({ type: GET_ERRORS, payload: err.response.data });
+    }
+};

@@ -1,19 +1,19 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { getWordlist, deleteWord } from '../../store/actions/wordlistActions';
+import {
+    getWordlist,
+    getWordlistSort,
+    deleteWord
+} from '../../store/actions/wordlistActions';
 import { Link } from 'react-router-dom';
 import Word from './Word';
+import WordlistOptions from './WordlistOptions';
 const NoWords = require('../../images/no-words.svg');
 
 class Wordlist extends Component {
     state = {
-        language: null,
-        list: null,
-        amount: 20,
-        unreviewed: false,
-        difficult: false,
-        spelling: false
+        sortValue: null
     };
 
     componentDidMount() {
@@ -24,6 +24,12 @@ class Wordlist extends Component {
         this.props.deleteWord(word_id);
     };
 
+    sortValueChanger = e => {
+        this.setState({
+            sortValue: e.target.value
+        });
+    };
+
     render() {
         const { words } = this.props.wordlist;
         let rowNumber = 0;
@@ -32,12 +38,12 @@ class Wordlist extends Component {
             <div className="mt-5">
                 {words.length > 0 && (
                     <div className="container mt-5">
-                        <Link
-                            to="/add-word"
-                            className="btn btn-lg btn-outline-success my-2 float-left"
-                        >
-                            <i className="fa fa-plus mr-2"></i> Add Word
-                        </Link>
+                        <WordlistOptions
+                            getWordlistSort={this.props.getWordlistSort}
+                            sortValueChanger={this.sortValueChanger}
+                            sortValue={this.state.sortValue}
+                        />
+
                         <table className="table table-striped shadow-lg bg-white">
                             <thead className="thead-dark">
                                 <tr>
@@ -119,5 +125,5 @@ const mapStateToProps = state => ({
 
 export default connect(
     mapStateToProps,
-    { getWordlist, deleteWord }
+    { getWordlist, deleteWord, getWordlistSort }
 )(Wordlist);
