@@ -75,14 +75,14 @@ router.get(
                 q6[0][Object.keys(q6[0])[0]]
             );
             result.recent_words = await sequelize.query(
-                'SELECT * FROM words WHERE user_id = :user_id ORDER BY times_incorrect DESC LIMIT 10',
+                'SELECT * FROM words WHERE user_id = :user_id ORDER BY created_at ASC LIMIT 10',
                 {
                     type: sequelize.QueryTypes.SELECT,
                     replacements: { user_id: Number(req.user.user_id) }
                 }
             );
             result.difficult_words = await sequelize.query(
-                'SELECT * FROM words WHERE user_id = :user_id ORDER BY created_at DESC LIMIT 10',
+                'SELECT * FROM words WHERE user_id = :user_id AND times_incorrect > 0 ORDER BY created_at ASC LIMIT 10',
                 {
                     type: sequelize.QueryTypes.SELECT,
                     replacements: { user_id: Number(req.user.user_id) }
