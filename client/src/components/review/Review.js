@@ -44,6 +44,11 @@ class Review extends Component {
         this.setState({ word_meaning: '' });
     };
 
+    finishReview = () => {
+        this.setState({ word_meaning: '' });
+        this.props.removeToReviewWords;
+    };
+
     render() {
         const { words, counter, loaded, result, done } = this.props.wordReview;
 
@@ -82,7 +87,7 @@ class Review extends Component {
                 {done && <ReviewResult words={words} />}
                 {done && (
                     <button
-                        onClick={this.props.removeToReviewWords}
+                        onClick={this.finishReview}
                         className="btn btn-primary btn-lg mt-3"
                     >
                         Finish Reviewing
