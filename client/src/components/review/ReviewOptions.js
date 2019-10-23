@@ -21,13 +21,6 @@ export default function ReviewOptions(props) {
             <button
                 onClick={e => props.retrieveWords(e)}
                 className="btn btn-outline-primary btn-large mx-1"
-                value="/words-retrieve/all_words/20"
-            >
-                All words
-            </button>
-            <button
-                onClick={e => props.retrieveWords(e)}
-                className="btn btn-outline-primary btn-large mx-1"
                 value="/words-retrieve/difficult_words/20"
             >
                 Difficult Words

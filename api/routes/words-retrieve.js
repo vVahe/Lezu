@@ -92,7 +92,7 @@ router.get(
 
         sequelize
             .query(
-                'SELECT * FROM words ORDER BY created_at DESC LIMIT :amount ',
+                'SELECT * FROM words ORDER BY created_at DESC LIMIT :amount',
                 {
                     replacements: { amount: Number(req.params.amount) },
                     type: sequelize.QueryTypes.SELECT
@@ -169,14 +169,14 @@ router.get(
  * @access  Private
  */
 router.get(
-    '/least_reviewed/:amount',
+    '/least_reviewed_words/:amount',
     passport.authenticate('jwt', { session: false }),
     (req, res, next) => {
         const errors = {};
 
         sequelize
             .query(
-                'SELECT * FROM words ORDER BY times_reviewed ASC LIMIT :amount ',
+                'SELECT * FROM words ORDER BY times_reviewed ASC LIMIT :amount',
                 {
                     replacements: { amount: Number(req.params.amount) },
                     type: sequelize.QueryTypes.SELECT
