@@ -6,7 +6,7 @@ export default function ReviewOptions(props) {
             <button
                 onClick={e => props.retrieveWords(e)}
                 className="btn btn-outline-primary btn-large mx-1"
-                value="/words-retrieve/unreviewed_words"
+                value="/words-retrieve/unreviewed_words/20"
             >
                 Unreviewed Words
             </button>
@@ -14,16 +14,37 @@ export default function ReviewOptions(props) {
             <button
                 onClick={e => props.retrieveWords(e)}
                 className="btn btn-outline-primary btn-large mx-1"
-                value="/words-retrieve/recently_added_words/2"
+                value="/words-retrieve/recently_added_words/20"
             >
                 Recently added
             </button>
             <button
                 onClick={e => props.retrieveWords(e)}
                 className="btn btn-outline-primary btn-large mx-1"
-                value="/words-retrieve/all_words"
+                value="/words-retrieve/all_words/20"
             >
                 All words
+            </button>
+            <button
+                onClick={e => props.retrieveWords(e)}
+                className="btn btn-outline-primary btn-large mx-1"
+                value="/words-retrieve/difficult_words/20"
+            >
+                Difficult Words
+            </button>
+            <button
+                onClick={e => props.retrieveWords(e)}
+                className="btn btn-outline-primary btn-large mx-1"
+                value="/words-retrieve/random_words/20"
+            >
+                Random Words
+            </button>
+            <button
+                onClick={e => props.retrieveWords(e)}
+                className="btn btn-outline-primary btn-large mx-1"
+                value="/words-retrieve/least_reviewed_words/20"
+            >
+                Least Reviewed
             </button>
         </div>
     );
