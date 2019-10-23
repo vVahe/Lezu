@@ -7,6 +7,7 @@ api/config/keys_dev
 
 # testing
 client/coverage
+api/coverage
 
 # production
 client/build
